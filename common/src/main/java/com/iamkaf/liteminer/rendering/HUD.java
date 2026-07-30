@@ -22,15 +22,13 @@ public class HUD {
             return;
         }
 
+        if (!LiteminerClient.isVeinMining()) {
+            return;
+        }
+
         int selectedBlockCount = LiteminerClient.selectedBlocks.size();
-
-        if (selectedBlockCount == 0) {
-            return;
-        }
-
-        if (!LiteminerClient.isVeinMining() || !LiteminerClient.isTargetingABlock()) {
-            return;
-        }
+        boolean hasSelectedTarget =
+                LiteminerClient.isTargetingABlock() && selectedBlockCount > 0;
 
         Font font = LiteminerClient.mc.font;
 
@@ -46,32 +44,36 @@ public class HUD {
         int xOffset = (int) (5 / scale);
         int yOffset = (int) (-10 / scale);
 
-        boolean blockedByHunger = LiteminerClient.isBlockedByHunger();
-        Component selectedBlocksLabel = blockedByHunger
-                ? Component.translatable("hud.liteminer.insufficient_hunger")
-                : Component.translatable(
-                        selectedBlockCount > 1
-                                ? "hud.liteminer.selected_blocks"
-                                : "hud.liteminer.selected_blocks_singular",
-                        selectedBlockCount
-                );
-        int selectedBlocksLabelColor =
-                blockedByHunger ? INSUFFICIENT_HUNGER_TEXT_COLOR : DEFAULT_TEXT_COLOR;
-
         var pose = guiGraphics.pose();
         pose.pushPose();
         pose.scale(scale, scale, 1f);
 
-        guiGraphics.drawString(font,
-                selectedBlocksLabel,
-                centerWidth + xOffset,
-                centerHeight + yOffset,
-                selectedBlocksLabelColor
-        );
+        if (hasSelectedTarget) {
+            boolean blockedByHunger = LiteminerClient.isBlockedByHunger();
+            Component selectedBlocksLabel = blockedByHunger
+                    ? Component.translatable("hud.liteminer.insufficient_hunger")
+                    : Component.translatable(
+                            selectedBlockCount > 1
+                                    ? "hud.liteminer.selected_blocks"
+                                    : "hud.liteminer.selected_blocks_singular",
+                            selectedBlockCount
+                    );
+            int selectedBlocksLabelColor =
+                    blockedByHunger ? INSUFFICIENT_HUNGER_TEXT_COLOR : DEFAULT_TEXT_COLOR;
+
+            guiGraphics.drawString(font,
+                    selectedBlocksLabel,
+                    centerWidth + xOffset,
+                    centerHeight + yOffset,
+                    selectedBlocksLabelColor
+            );
+        }
+
+        int shapeYOffset = hasSelectedTarget ? yOffset + lineHeight : yOffset;
         guiGraphics.drawString(font,
                 LiteminerClient.shapes.getCurrentItem().getDisplayName(),
                 centerWidth + xOffset,
-                centerHeight + yOffset + lineHeight,
+                centerHeight + shapeYOffset,
                 DEFAULT_TEXT_COLOR
         );
 
