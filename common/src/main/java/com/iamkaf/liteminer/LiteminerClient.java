@@ -16,7 +16,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.HashSet;
 
@@ -24,7 +23,7 @@ public class LiteminerClient {
     public static final int PACKET_DELAY = 125;
     public static final KeyMapping KEY_MAPPING = new KeyMapping("key.liteminer.veinmine",
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_GRAVE_ACCENT,
+            InputConstants.UNKNOWN.getValue(),
             "key.categories.liteminer"
     );
     public static final LiteminerClientConfig CONFIG;
@@ -33,6 +32,8 @@ public class LiteminerClient {
     public static Minecraft mc;
     public static Cycler<Walker> shapes = new Cycler<>(Liteminer.WALKERS);
     private static boolean currentState = false;
+    private static boolean hungerRequired = true;
+    private static boolean lastDistinguishDeepslateOres = true;
     private static long lastChange = System.currentTimeMillis();
 
     static {
@@ -51,6 +52,12 @@ public class LiteminerClient {
     }
 
     public static void onPostTick(Minecraft minecraft) {
+        boolean distinguishDeepslateOres = CONFIG.distinguishDeepslateOres.get();
+        if (distinguishDeepslateOres != lastDistinguishDeepslateOres) {
+            lastDistinguishDeepslateOres = distinguishDeepslateOres;
+            syncStateToServer();
+        }
+
         if ((System.currentTimeMillis() - getLastChange()) < PACKET_DELAY) {
             return;
         }
@@ -63,17 +70,13 @@ public class LiteminerClient {
                     return;
                 }
 
-                new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(newState,
-                        shapes.getCurrentIndex()
-                ).sendToServer();
+                sendStateToServer(newState);
                 currentState = newState;
             }
             case TOGGLE -> {
                 if (KEY_MAPPING.consumeClick()) {
                     var newState = !isVeinMining();
-                    new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(newState,
-                            shapes.getCurrentIndex()
-                    ).sendToServer();
+                    sendStateToServer(newState);
                     currentState = newState;
                 }
             }
@@ -82,6 +85,32 @@ public class LiteminerClient {
 
     public static boolean isVeinMining() {
         return currentState;
+    }
+
+    public static void sendStateToServer(boolean keybindState) {
+        new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(keybindState,
+                shapes.getCurrentIndex(),
+                CONFIG.distinguishDeepslateOres.get()
+        ).sendToServer();
+    }
+
+    public static void syncStateToServer() {
+        if (mc == null || mc.getConnection() == null) {
+            return;
+        }
+        sendStateToServer(isVeinMining());
+    }
+
+    public static boolean isBlockedByHunger() {
+        return mc != null
+                && mc.player != null
+                && !mc.player.isCreative()
+                && hungerRequired
+                && mc.player.getFoodData().getFoodLevel() <= 0;
+    }
+
+    public static void setHungerRequired(boolean hungerRequired) {
+        LiteminerClient.hungerRequired = hungerRequired;
     }
 
     public static long getLastChange() {

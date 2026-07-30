@@ -11,6 +11,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 public class HUD {
+    private static final int DEFAULT_TEXT_COLOR = 0xFFFFFF;
+    private static final int INSUFFICIENT_HUNGER_TEXT_COLOR = 0xFFA500;
+
     public static void onRenderHUD(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         if (!LiteminerClient.CONFIG.showHUD.get()) {
             return;
@@ -20,15 +23,13 @@ public class HUD {
             return;
         }
 
+        if (!LiteminerClient.isVeinMining()) {
+            return;
+        }
+
         int selectedBlockCount = LiteminerClient.selectedBlocks.size();
-
-        if (selectedBlockCount == 0) {
-            return;
-        }
-
-        if (!LiteminerClient.isVeinMining() || !LiteminerClient.isTargetingABlock()) {
-            return;
-        }
+        boolean hasSelectedTarget =
+                LiteminerClient.isTargetingABlock() && selectedBlockCount > 0;
 
         Font font = LiteminerClient.mc.font;
 
@@ -44,27 +45,37 @@ public class HUD {
         int xOffset = (int) (5 / scale);
         int yOffset = (int) (-10 / scale);
 
-        String selectedBlocksLabel = Component.translatable(
-                selectedBlockCount > 1 ? "hud.liteminer.selected_blocks" : "hud.liteminer" +
-                        ".selected_blocks_singular",
-                selectedBlockCount
-        ).getString();
-
         var pose = guiGraphics.pose();
         pose.pushPose();
         pose.scale(scale, scale, 1f);
 
+        if (hasSelectedTarget) {
+            boolean blockedByHunger = LiteminerClient.isBlockedByHunger();
+            Component selectedBlocksLabel = blockedByHunger
+                    ? Component.translatable("hud.liteminer.insufficient_hunger")
+                    : Component.translatable(
+                            selectedBlockCount > 1
+                                    ? "hud.liteminer.selected_blocks"
+                                    : "hud.liteminer.selected_blocks_singular",
+                            selectedBlockCount
+                    );
+            int selectedBlocksLabelColor =
+                    blockedByHunger ? INSUFFICIENT_HUNGER_TEXT_COLOR : DEFAULT_TEXT_COLOR;
+
+            guiGraphics.drawString(font,
+                    selectedBlocksLabel,
+                    centerWidth + xOffset,
+                    centerHeight + yOffset,
+                    selectedBlocksLabelColor
+            );
+        }
+
+        int shapeYOffset = hasSelectedTarget ? yOffset + lineHeight : yOffset;
         guiGraphics.drawString(font,
-                selectedBlocksLabel,
+                LiteminerClient.shapes.getCurrentItem().getDisplayName(),
                 centerWidth + xOffset,
-                centerHeight + yOffset,
-                0xFFFFFF
-        );
-        guiGraphics.drawString(font,
-                LiteminerClient.shapes.getCurrentItem().toString(),
-                centerWidth + xOffset,
-                centerHeight + yOffset + lineHeight,
-                0xFFFFFF
+                centerHeight + shapeYOffset,
+                DEFAULT_TEXT_COLOR
         );
 
         pose.popPose();
@@ -78,15 +89,13 @@ public class HUD {
                 } else if (y < 0) {
                     LiteminerClient.shapes.nextItem();
                 }
-                new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(LiteminerClient.isVeinMining(),
-                        LiteminerClient.shapes.getCurrentIndex()
-                ).sendToServer();
+                LiteminerClient.sendStateToServer(LiteminerClient.isVeinMining());
             }
             if (!LiteminerClient.CONFIG.showHUD.get()) {
                 assert minecraft.player != null;
                 FeedbackHelper.actionBarMessage(minecraft.player, Component.translatable(
                         "hud.liteminer.changed_shape",
-                        LiteminerClient.shapes.getCurrentItem().toString()
+                        LiteminerClient.shapes.getCurrentItem().getDisplayName()
                 ));
             }
             return EventResult.interruptFalse();

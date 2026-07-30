@@ -53,6 +53,10 @@ public class OnBlockInteraction {
             return EventResult.pass();
         }
 
+        if (!FoodExhaustion.canUseLiteminerOrNotify((ServerPlayer) player)) {
+            return EventResult.pass();
+        }
+
         // 1 durability left on the tool
         if (tool.isDamageableItem() && (tool.getMaxDamage() - tool.getDamageValue()) == 1) {
             return EventResult.pass();
@@ -60,7 +64,11 @@ public class OnBlockInteraction {
 
         Walker walker = WALKERS.get(playerState.getShape());
 
-        var blocks = walker.walk(level, player, blockPos)
+        var blocks = walker.walk(level,
+                        player,
+                        blockPos,
+                        playerState.getDistinguishDeepslateOres()
+                )
                 .stream()
                 .sorted(Comparator.comparingInt(p -> p.distManhattan(blockPos)))
                 .toList();
@@ -80,11 +88,7 @@ public class OnBlockInteraction {
 
             item.useOn(new UseOnContext(player, hand, new BlockHitResult(block.getBottomCenter(), direction, block, false)));
 
-            boolean exhaustionEnabled = Liteminer.CONFIG.foodExhaustionEnabled.get();
-            float exhaustion = Liteminer.CONFIG.foodExhaustion.get().floatValue();
-            if (exhaustionEnabled && exhaustion > 0) {
-                player.causeFoodExhaustion(exhaustion);
-            }
+            FoodExhaustion.apply(player);
         }
 
         return EventResult.pass();

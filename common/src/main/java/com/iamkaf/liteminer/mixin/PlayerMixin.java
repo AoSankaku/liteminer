@@ -46,6 +46,10 @@ public abstract class PlayerMixin extends LivingEntity {
     private int liteminer$calculateBlockCountForClient() {
         ShapelessWalker shapelessWalker = new ShapelessWalker();
         Player player = (Player) (Object) this;
-        return shapelessWalker.walk(level(), player, ShapelessWalker.raytrace(level(), player).getBlockPos()).size();
+        return shapelessWalker.walk(level(),
+                player,
+                ShapelessWalker.raytrace(level(), player).getBlockPos(),
+                LiteminerClient.CONFIG.distinguishDeepslateOres.get()
+        ).size();
     }
 }

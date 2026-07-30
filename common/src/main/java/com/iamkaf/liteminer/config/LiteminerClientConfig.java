@@ -6,6 +6,7 @@ public final class LiteminerClientConfig {
     public final ModConfigSpec.ConfigValue<KeyMode> keyMode;
     public final ModConfigSpec.ConfigValue<Boolean> showHUD;
     public final ModConfigSpec.ConfigValue<Double> hud_scale;
+    public final ModConfigSpec.ConfigValue<Boolean> distinguishDeepslateOres;
 
     public LiteminerClientConfig(ModConfigSpec.Builder builder) {
         keyMode = builder.translation("liteminer.config.key_mode")
@@ -15,5 +16,8 @@ public final class LiteminerClientConfig {
         hud_scale = builder.translation("liteminer.config.hud_scale")
                 .comment(":)")
                 .defineInRange("hud_scale", 1d, 0.5d, 2d);
+        distinguishDeepslateOres = builder.translation("liteminer.config.distinguish_deepslate_ores")
+                .comment("Whether regular and deepslate ore variants should be mined separately.")
+                .define("distinguish_deepslate_ores", true);
     }
 }

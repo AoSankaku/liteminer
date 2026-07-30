@@ -4,6 +4,7 @@ import com.iamkaf.liteminer.Liteminer;
 import com.iamkaf.liteminer.tags.TagHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
@@ -35,11 +36,6 @@ public class ShapelessWalker implements Walker {
         ));
     }
 
-    @Override
-    public String toString() {
-        return "Shapeless";
-    }
-
     public static @NotNull BlockPos raytraceBlock(Level level, Player player) {
         var rayTraceResult = raytrace(level, player);
 
@@ -53,7 +49,18 @@ public class ShapelessWalker implements Walker {
         };
     }
 
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("shape.liteminer.shapeless");
+    }
+
     public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin) {
+        return walk(level, player, origin, true);
+    }
+
+    @Override
+    public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin,
+            boolean distinguishDeepslateOres) {
         HashSet<BlockPos> potentialBrokenBlocks = new HashSet<>();
 
         potentialBrokenBlocks.add(origin);
@@ -68,24 +75,41 @@ public class ShapelessWalker implements Walker {
             return potentialBrokenBlocks;
         }
 
-        searchBlocks(player, level, origin, origin, potentialBrokenBlocks, originState.getBlock());
+        searchBlocks(player,
+                level,
+                origin,
+                origin,
+                potentialBrokenBlocks,
+                originState.getBlock(),
+                distinguishDeepslateOres
+        );
         VISITED.clear();
 
         return potentialBrokenBlocks;
     }
 
     private void searchBlocks(Player player, Level level, BlockPos myPos, BlockPos absoluteOrigin,
-            HashSet<BlockPos> blocksToCollapse, Block originBlock) {
+            HashSet<BlockPos> blocksToCollapse, Block originBlock, boolean distinguishDeepslateOres) {
         if (VISITED.size() >= Liteminer.CONFIG.blockBreakLimit.get()) return;
         if (VISITED.contains(myPos)) return;
-        if (!BlockFamily.matches(originBlock, level.getBlockState(myPos).getBlock())) return;
+        if (!BlockFamily.matches(originBlock,
+                level.getBlockState(myPos).getBlock(),
+                distinguishDeepslateOres
+        )) return;
         if (!shouldMine(player, level, myPos)) return;
 
         blocksToCollapse.add(myPos);
         VISITED.add(myPos);
 
         for (var neighborPos : getNeighbors(myPos, absoluteOrigin)) {
-            searchBlocks(player, level, neighborPos, absoluteOrigin, blocksToCollapse, originBlock);
+            searchBlocks(player,
+                    level,
+                    neighborPos,
+                    absoluteOrigin,
+                    blocksToCollapse,
+                    originBlock,
+                    distinguishDeepslateOres
+            );
         }
     }
 

@@ -4,6 +4,7 @@ import com.iamkaf.liteminer.Liteminer;
 import com.iamkaf.liteminer.tags.TagHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -17,8 +18,8 @@ public class StaircaseUpWalker implements Walker {
     public final Set<BlockPos> VISITED = new HashSet<>();
 
     @Override
-    public String toString() {
-        return "Staircase Up";
+    public Component getDisplayName() {
+        return Component.translatable("shape.liteminer.staircase_up");
     }
 
     public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin) {

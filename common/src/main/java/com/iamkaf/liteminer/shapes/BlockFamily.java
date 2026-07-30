@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BlockFamily {
     private static final Map<Block, Set<Block>> BLOCK_MATCHES = new HashMap<>();
@@ -23,11 +24,16 @@ public class BlockFamily {
      *
      * @param from The block being checked against.
      * @param to   The block to compare with.
+     * @param distinguishDeepslateOres Whether differently hosted ore variants should be kept separate.
      * @return true if the blocks are either the same or part of the same family, false otherwise.
      */
-    public static boolean matches(Block from, Block to) {
+    public static boolean matches(Block from, Block to, boolean distinguishDeepslateOres) {
         if (to.equals(from)) {
             return true;
+        }
+
+        if (shareOreFamilyTag(from, to)) {
+            return !distinguishDeepslateOres;
         }
 
         if (BLOCK_MATCHES.containsKey(to)) {
@@ -40,6 +46,29 @@ public class BlockFamily {
         }
 
         return false;
+    }
+
+    private static boolean shareOreFamilyTag(Block from, Block to) {
+        var fromOreTags = from.defaultBlockState()
+                .getTags()
+                .filter(tag -> isOreFamilyTag(tag.location().getNamespace(), tag.location().getPath()))
+                .collect(Collectors.toSet());
+
+        return !fromOreTags.isEmpty() && to.defaultBlockState()
+                .getTags()
+                .filter(tag -> isOreFamilyTag(tag.location().getNamespace(), tag.location().getPath()))
+                .anyMatch(fromOreTags::contains);
+    }
+
+    private static boolean isOreFamilyTag(String namespace, String path) {
+        boolean isHierarchicalOreTag = path.startsWith("ores/") && path.length() > "ores/".length();
+        if ("forge".equals(namespace)) {
+            return isHierarchicalOreTag;
+        }
+        if ("c".equals(namespace)) {
+            return isHierarchicalOreTag || (path.endsWith("_ores") && !"ores".equals(path));
+        }
+        return "minecraft".equals(namespace) && path.endsWith("_ores");
     }
 
     /**
