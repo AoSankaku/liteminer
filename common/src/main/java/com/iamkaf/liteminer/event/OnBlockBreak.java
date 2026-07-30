@@ -44,6 +44,10 @@ public class OnBlockBreak {
             return EventResult.pass();
         }
 
+        if (!FoodExhaustion.canUseLiteminer(player)) {
+            return EventResult.pass();
+        }
+
         ItemStack tool = player.getMainHandItem();
 
         if (TagHelper.isExcludedTool(tool)) {
