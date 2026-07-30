@@ -3,6 +3,7 @@ package com.iamkaf.liteminer.shapes;
 import com.iamkaf.liteminer.tags.TagHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -29,8 +30,8 @@ public class ThreeByThreeWalker implements Walker {
     }
 
     @Override
-    public String toString() {
-        return "3x3";
+    public Component getDisplayName() {
+        return Component.translatable("shape.liteminer.three_by_three");
     }
 
     public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin) {

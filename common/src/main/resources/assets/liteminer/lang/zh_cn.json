@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "连锁挖掘",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "无固定形状",
+  "shape.liteminer.small_tunnel": "小型隧道",
+  "shape.liteminer.staircase_up": "向上阶梯",
+  "shape.liteminer.staircase_down": "向下阶梯",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s 个方块",
   "hud.liteminer.selected_blocks_singular": "1 个方块",
   "hud.liteminer.insufficient_hunger": "饥饿值不足",

@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Aderabbau",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Formlos",
+  "shape.liteminer.small_tunnel": "Kleiner Tunnel",
+  "shape.liteminer.staircase_up": "Treppe aufwärts",
+  "shape.liteminer.staircase_down": "Treppe abwärts",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s Blöcke",
   "hud.liteminer.selected_blocks_singular": "1 Block",
   "hud.liteminer.insufficient_hunger": "Nicht genug Nahrung",

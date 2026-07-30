@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "一括破壊",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "自由形",
+  "shape.liteminer.small_tunnel": "小型トンネル",
+  "shape.liteminer.staircase_up": "上り階段",
+  "shape.liteminer.staircase_down": "下り階段",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "対象: %sブロック",
   "hud.liteminer.selected_blocks_singular": "対象: 1ブロック",
   "hud.liteminer.insufficient_hunger": "満腹度が不足しています",

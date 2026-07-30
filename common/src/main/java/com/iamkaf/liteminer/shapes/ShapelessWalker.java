@@ -4,6 +4,7 @@ import com.iamkaf.liteminer.Liteminer;
 import com.iamkaf.liteminer.tags.TagHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -45,8 +46,8 @@ public class ShapelessWalker implements Walker {
     }
 
     @Override
-    public String toString() {
-        return "Shapeless";
+    public Component getDisplayName() {
+        return Component.translatable("shape.liteminer.shapeless");
     }
 
     public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin) {

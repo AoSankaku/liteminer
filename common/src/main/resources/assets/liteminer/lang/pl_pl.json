@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Wydobywanie żyły",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Bez kształtu",
+  "shape.liteminer.small_tunnel": "Mały tunel",
+  "shape.liteminer.staircase_up": "Schody w górę",
+  "shape.liteminer.staircase_down": "Schody w dół",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s bloków",
   "hud.liteminer.selected_blocks_singular": "1 blok",
   "hud.liteminer.insufficient_hunger": "Zbyt niski poziom głodu",

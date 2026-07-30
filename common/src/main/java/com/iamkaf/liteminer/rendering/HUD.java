@@ -69,7 +69,7 @@ public class HUD {
                 selectedBlocksLabelColor
         );
         guiGraphics.drawString(font,
-                LiteminerClient.shapes.getCurrentItem().toString(),
+                LiteminerClient.shapes.getCurrentItem().getDisplayName(),
                 centerWidth + xOffset,
                 centerHeight + yOffset + lineHeight,
                 DEFAULT_TEXT_COLOR
@@ -92,7 +92,7 @@ public class HUD {
                 assert minecraft.player != null;
                 FeedbackHelper.actionBarMessage(minecraft.player, Component.translatable(
                         "hud.liteminer.changed_shape",
-                        LiteminerClient.shapes.getCurrentItem().toString()
+                        LiteminerClient.shapes.getCurrentItem().getDisplayName()
                 ));
             }
             return EventResult.interruptFalse();

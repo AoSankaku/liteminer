@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Добыча жилы",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Без формы",
+  "shape.liteminer.small_tunnel": "Малый тоннель",
+  "shape.liteminer.staircase_up": "Лестница вверх",
+  "shape.liteminer.staircase_down": "Лестница вниз",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s блоков",
   "hud.liteminer.selected_blocks_singular": "1 блок",
   "hud.liteminer.insufficient_hunger": "Недостаточно сытости",

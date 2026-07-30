@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Minería en veta",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Sin forma",
+  "shape.liteminer.small_tunnel": "Túnel pequeño",
+  "shape.liteminer.staircase_up": "Escalera ascendente",
+  "shape.liteminer.staircase_down": "Escalera descendente",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s bloques",
   "hud.liteminer.selected_blocks_singular": "1 bloque",
   "hud.liteminer.insufficient_hunger": "Nivel de alimento insuficiente",

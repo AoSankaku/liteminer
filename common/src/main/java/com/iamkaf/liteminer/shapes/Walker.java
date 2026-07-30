@@ -3,6 +3,7 @@ package com.iamkaf.liteminer.shapes;
 import com.iamkaf.liteminer.Liteminer;
 import com.iamkaf.liteminer.tags.TagHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -12,6 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.HashSet;
 
 public interface Walker {
+    Component getDisplayName();
+
     HashSet<BlockPos> walk(Level level, Player player, BlockPos origin);
 
     default HashSet<BlockPos> walk(Level level, Player player, BlockPos origin,

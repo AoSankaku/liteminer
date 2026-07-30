@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "광맥 채굴",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "자유 형태",
+  "shape.liteminer.small_tunnel": "작은 터널",
+  "shape.liteminer.staircase_up": "위쪽 계단",
+  "shape.liteminer.staircase_down": "아래쪽 계단",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s개 블록",
   "hud.liteminer.selected_blocks_singular": "블록 1개",
   "hud.liteminer.insufficient_hunger": "허기가 부족합니다",

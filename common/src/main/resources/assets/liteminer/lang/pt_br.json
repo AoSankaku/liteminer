@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Mineração em veio",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Sem formato",
+  "shape.liteminer.small_tunnel": "Túnel pequeno",
+  "shape.liteminer.staircase_up": "Escadaria para cima",
+  "shape.liteminer.staircase_down": "Escadaria para baixo",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s blocos",
   "hud.liteminer.selected_blocks_singular": "1 bloco",
   "hud.liteminer.insufficient_hunger": "Nível de fome insuficiente",

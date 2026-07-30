@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Scavo della vena",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Senza forma",
+  "shape.liteminer.small_tunnel": "Tunnel piccolo",
+  "shape.liteminer.staircase_up": "Scala in salita",
+  "shape.liteminer.staircase_down": "Scala in discesa",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s blocchi",
   "hud.liteminer.selected_blocks_singular": "1 blocco",
   "hud.liteminer.insufficient_hunger": "Livello di fame insufficiente",

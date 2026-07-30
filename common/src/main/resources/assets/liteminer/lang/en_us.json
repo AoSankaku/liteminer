@@ -2,6 +2,12 @@
   "key.liteminer.veinmine": "Vein Mine",
   "key.categories.liteminer": "Liteminer",
 
+  "shape.liteminer.shapeless": "Shapeless",
+  "shape.liteminer.small_tunnel": "Small Tunnel",
+  "shape.liteminer.staircase_up": "Staircase Up",
+  "shape.liteminer.staircase_down": "Staircase Down",
+  "shape.liteminer.three_by_three": "3x3",
+
   "hud.liteminer.selected_blocks": "%s Blocks",
   "hud.liteminer.selected_blocks_singular": "1 Block",
   "hud.liteminer.insufficient_hunger": "Not Enough Hunger",

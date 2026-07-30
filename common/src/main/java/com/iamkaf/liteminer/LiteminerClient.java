@@ -16,7 +16,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.HashSet;
 
@@ -24,7 +23,7 @@ public class LiteminerClient {
     public static final int PACKET_DELAY = 125;
     public static final KeyMapping KEY_MAPPING = new KeyMapping("key.liteminer.veinmine",
             InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_GRAVE_ACCENT,
+            InputConstants.UNKNOWN.getValue(),
             "key.categories.liteminer"
     );
     public static final LiteminerClientConfig CONFIG;
