@@ -4,7 +4,9 @@
 
   "hud.liteminer.selected_blocks": "%s Blocks",
   "hud.liteminer.selected_blocks_singular": "1 Block",
+  "hud.liteminer.insufficient_hunger": "Not Enough Hunger",
   "hud.liteminer.changed_shape": "Changed Shape [%s]",
+  "message.liteminer.insufficient_hunger": "Not enough hunger to vein mine.",
 
   "liteminer.configuration.title": "Liteminer Configuration",
   "liteminer.configuration.section.liteminer.common.toml.title": "Liteminer Configuration",

@@ -1,11 +1,14 @@
 package com.iamkaf.liteminer.event;
 
 import com.iamkaf.liteminer.Liteminer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
-final class FoodExhaustion {
+public final class FoodExhaustion {
     private static final ResourceLocation FARMERS_DELIGHT_NOURISHMENT =
             new ResourceLocation("farmersdelight", "nourishment");
 
@@ -14,9 +17,22 @@ final class FoodExhaustion {
 
     static boolean canUseLiteminer(Player player) {
         return player.isCreative()
-                || Liteminer.CONFIG.allowVeinMiningAtZeroHunger.get()
-                || !isEnabled()
+                || !isHungerRequired()
                 || player.getFoodData().getFoodLevel() > 0;
+    }
+
+    static boolean canUseLiteminerOrNotify(ServerPlayer player) {
+        if (canUseLiteminer(player)) {
+            return true;
+        }
+
+        player.sendSystemMessage(Component.translatable("message.liteminer.insufficient_hunger")
+                .withStyle(ChatFormatting.RED));
+        return false;
+    }
+
+    public static boolean isHungerRequired() {
+        return !Liteminer.CONFIG.allowVeinMiningAtZeroHunger.get() && isEnabled();
     }
 
     static void apply(Player player) {

@@ -10,6 +10,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
 public class HUD {
+    private static final int DEFAULT_TEXT_COLOR = 0xFFFFFF;
+    private static final int INSUFFICIENT_HUNGER_TEXT_COLOR = 0xFFA500;
+
     public static void onRenderHUD(GuiGraphics guiGraphics, float deltaTracker) {
         if (!LiteminerClient.CONFIG.showHUD.get()) {
             return;
@@ -43,11 +46,17 @@ public class HUD {
         int xOffset = (int) (5 / scale);
         int yOffset = (int) (-10 / scale);
 
-        String selectedBlocksLabel = Component.translatable(
-                selectedBlockCount > 1 ? "hud.liteminer.selected_blocks" : "hud.liteminer" +
-                        ".selected_blocks_singular",
-                selectedBlockCount
-        ).getString();
+        boolean blockedByHunger = LiteminerClient.isBlockedByHunger();
+        Component selectedBlocksLabel = blockedByHunger
+                ? Component.translatable("hud.liteminer.insufficient_hunger")
+                : Component.translatable(
+                        selectedBlockCount > 1
+                                ? "hud.liteminer.selected_blocks"
+                                : "hud.liteminer.selected_blocks_singular",
+                        selectedBlockCount
+                );
+        int selectedBlocksLabelColor =
+                blockedByHunger ? INSUFFICIENT_HUNGER_TEXT_COLOR : DEFAULT_TEXT_COLOR;
 
         var pose = guiGraphics.pose();
         pose.pushPose();
@@ -57,13 +66,13 @@ public class HUD {
                 selectedBlocksLabel,
                 centerWidth + xOffset,
                 centerHeight + yOffset,
-                0xFFFFFF
+                selectedBlocksLabelColor
         );
         guiGraphics.drawString(font,
                 LiteminerClient.shapes.getCurrentItem().toString(),
                 centerWidth + xOffset,
                 centerHeight + yOffset + lineHeight,
-                0xFFFFFF
+                DEFAULT_TEXT_COLOR
         );
 
         pose.popPose();

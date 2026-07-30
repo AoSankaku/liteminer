@@ -44,7 +44,7 @@ public class OnBlockBreak {
             return EventResult.pass();
         }
 
-        if (!FoodExhaustion.canUseLiteminer(player)) {
+        if (!FoodExhaustion.canUseLiteminerOrNotify(player)) {
             return EventResult.pass();
         }
 

@@ -33,6 +33,7 @@ public class LiteminerClient {
     public static Minecraft mc;
     public static Cycler<Walker> shapes = new Cycler<>(Liteminer.WALKERS);
     private static boolean currentState = false;
+    private static boolean hungerRequired = true;
     private static long lastChange = System.currentTimeMillis();
 
     static {
@@ -92,6 +93,18 @@ public class LiteminerClient {
             return;
         }
         sendStateToServer(isVeinMining());
+    }
+
+    public static boolean isBlockedByHunger() {
+        return mc != null
+                && mc.player != null
+                && !mc.player.isCreative()
+                && hungerRequired
+                && mc.player.getFoodData().getFoodLevel() <= 0;
+    }
+
+    public static void setHungerRequired(boolean hungerRequired) {
+        LiteminerClient.hungerRequired = hungerRequired;
     }
 
     public static long getLastChange() {

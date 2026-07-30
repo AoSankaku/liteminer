@@ -53,7 +53,7 @@ public class OnBlockInteraction {
             return EventResult.pass();
         }
 
-        if (!FoodExhaustion.canUseLiteminer(player)) {
+        if (!FoodExhaustion.canUseLiteminerOrNotify((ServerPlayer) player)) {
             return EventResult.pass();
         }
 
