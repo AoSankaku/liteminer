@@ -1,0 +1,46 @@
+{
+  "key.liteminer.veinmine": "連鎖挖掘",
+  "key.categories.liteminer": "Liteminer",
+
+  "hud.liteminer.selected_blocks": "%s 個方塊",
+  "hud.liteminer.selected_blocks_singular": "1 個方塊",
+  "hud.liteminer.insufficient_hunger": "飢餓值不足",
+  "hud.liteminer.changed_shape": "已變更挖掘形狀 [%s]",
+  "message.liteminer.insufficient_hunger": "飢餓值不足，無法進行連鎖挖掘。",
+
+  "liteminer.configuration.title": "Liteminer 設定",
+  "liteminer.configuration.section.liteminer.common.toml.title": "Liteminer 設定",
+
+  "liteminer.config.key_mode": "按鍵模式",
+  "liteminer.config.key_mode.tooltip": "在按住模式下，需要持續按住按鍵；在切換模式下，按下按鍵即可開啟或關閉連鎖挖掘。",
+
+  "liteminer.config.show_hud": "顯示 HUD",
+  "liteminer.config.show_hud.tooltip": "顯示已選取的方塊數量與挖掘形狀。",
+
+  "liteminer.config.hud_scale": "HUD 縮放",
+  "liteminer.config.hud_scale.tooltip": "調整 HUD 元素的大小。",
+
+  "liteminer.config.distinguish_deepslate_ores": "區分深層礦石",
+  "liteminer.config.distinguish_deepslate_ores.tooltip": "避免普通礦石與相同種類的深層礦石一起被挖掘。",
+
+  "liteminer.config.block_break_limit": "方塊破壞上限",
+  "liteminer.config.block_break_limit.tooltip": "一次最多可破壞的方塊數量。",
+
+  "liteminer.config.require_correct_tool_enabled": "需要正確工具",
+  "liteminer.config.require_correct_tool_enabled.tooltip": "只有手持適合的工具時才能破壞方塊。",
+
+  "liteminer.config.harvest_time_per_block_modifier_enabled": "增加挖掘時間",
+  "liteminer.config.harvest_time_per_block_modifier_enabled.tooltip": "連鎖挖掘時增加所需的挖掘時間。",
+  "liteminer.config.harvest_time_per_block_modifier": "挖掘時間修正值",
+  "liteminer.config.harvest_time_per_block_modifier.tooltip": "控制挖掘時間的增加量。數值越大，挖掘所需時間越長。",
+
+  "liteminer.config.food_exhaustion_enabled": "消耗飢餓值",
+  "liteminer.config.food_exhaustion_enabled.tooltip": "每挖掘一個方塊都會消耗飢餓值。",
+  "liteminer.config.food_exhaustion": "飢餓消耗量",
+  "liteminer.config.food_exhaustion.tooltip": "每破壞一個方塊所增加的消耗量。",
+  "liteminer.config.allow_vein_mining_at_zero_hunger": "允許空腹連鎖挖掘",
+  "liteminer.config.allow_vein_mining_at_zero_hunger.tooltip": "飢餓欄為空時仍允許進行連鎖挖掘。",
+
+  "liteminer.config.prevent_tool_breaking": "防止工具損壞",
+  "liteminer.config.prevent_tool_breaking.tooltip": "當工具只剩 1 點耐久度時停止連鎖挖掘。"
+}
