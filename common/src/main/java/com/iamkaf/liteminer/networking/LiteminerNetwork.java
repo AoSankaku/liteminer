@@ -22,15 +22,19 @@ public class LiteminerNetwork {
         public static class C2SVeinmineKeybindChange extends BaseC2SMessage {
             private final boolean keybindState;
             private final int shape;
+            private final boolean distinguishDeepslateOres;
 
-            public C2SVeinmineKeybindChange(boolean keybindState, int shape) {
+            public C2SVeinmineKeybindChange(boolean keybindState, int shape,
+                    boolean distinguishDeepslateOres) {
                 this.keybindState = keybindState;
                 this.shape = shape;
+                this.distinguishDeepslateOres = distinguishDeepslateOres;
             }
 
             public C2SVeinmineKeybindChange(FriendlyByteBuf buf) {
                 this.keybindState = buf.readBoolean();
                 this.shape = buf.readInt();
+                this.distinguishDeepslateOres = buf.readBoolean();
             }
 
             @Override
@@ -42,11 +46,16 @@ public class LiteminerNetwork {
             public void write(FriendlyByteBuf buf) {
                 buf.writeBoolean(keybindState);
                 buf.writeInt(shape);
+                buf.writeBoolean(distinguishDeepslateOres);
             }
 
             @Override
             public void handle(NetworkManager.PacketContext context) {
-                Liteminer.instance.onKeymappingStateChange((ServerPlayer) context.getPlayer(), keybindState, shape);
+                Liteminer.instance.onKeymappingStateChange((ServerPlayer) context.getPlayer(),
+                        keybindState,
+                        shape,
+                        distinguishDeepslateOres
+                );
             }
         }
     }

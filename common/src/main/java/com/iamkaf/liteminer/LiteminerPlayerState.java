@@ -6,6 +6,7 @@ public class LiteminerPlayerState {
     private final UUID uuid;
     private boolean keymappingState = false;
     private int shape = 0;
+    private boolean distinguishDeepslateOres = true;
 
     public LiteminerPlayerState(UUID playerUuid) {
         this.uuid = playerUuid;
@@ -29,5 +30,13 @@ public class LiteminerPlayerState {
 
     public void setShape(int shape) {
         this.shape = shape;
+    }
+
+    public boolean getDistinguishDeepslateOres() {
+        return distinguishDeepslateOres;
+    }
+
+    public void setDistinguishDeepslateOres(boolean distinguishDeepslateOres) {
+        this.distinguishDeepslateOres = distinguishDeepslateOres;
     }
 }

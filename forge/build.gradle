@@ -8,6 +8,7 @@ dependencies {
     forge "net.minecraftforge:forge:$rootProject.forge_version"
 
     modImplementation "com.iamkaf.amber:amber-forge:$rootProject.amber_version"
+    modCompileOnly "me.shedaniel.cloth:cloth-config-forge:$rootProject.cloth_config_version"
     modRuntimeOnly("dev.emi:emi-forge:${rootProject.emi_version}")
 }
 

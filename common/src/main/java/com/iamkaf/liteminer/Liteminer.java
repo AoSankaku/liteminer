@@ -68,10 +68,12 @@ public final class Liteminer {
         return playerStateMap.computeIfAbsent(player.getUUID(), LiteminerPlayerState::new);
     }
 
-    public void onKeymappingStateChange(ServerPlayer player, boolean keybindState, int shape) {
+    public void onKeymappingStateChange(ServerPlayer player, boolean keybindState, int shape,
+            boolean distinguishDeepslateOres) {
         var playerState = getPlayerState(player);
         playerState.setKeymappingState(keybindState);
         playerState.setShape(shape);
+        playerState.setDistinguishDeepslateOres(distinguishDeepslateOres);
     }
 
     public float onBreakSpeed(ServerPlayer player, float originalSpeed) {
@@ -81,7 +83,11 @@ public final class Liteminer {
         if (isVeinMining) {
             Level level = player.level();
             int blockCount = WALKERS.get(playerState.getShape())
-                    .walk(level, player, ShapelessWalker.raytrace(level, player).getBlockPos())
+                    .walk(level,
+                            player,
+                            ShapelessWalker.raytrace(level, player).getBlockPos(),
+                            playerState.getDistinguishDeepslateOres()
+                    )
                     .size();
             return getScaledBreakSpeedModifier(blockCount);
         }

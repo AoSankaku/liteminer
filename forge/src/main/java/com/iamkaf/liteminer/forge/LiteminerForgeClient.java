@@ -7,6 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
@@ -18,6 +19,9 @@ public class LiteminerForgeClient {
         @SubscribeEvent
         public static void onConstructMod(final FMLConstructModEvent evt) {
             ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, LiteminerClient.CONFIG_SPEC);
+            if (ModList.get().isLoaded("cloth_config")) {
+                ClothConfigIntegration.registerConfigScreen();
+            }
             LiteminerClient.init();
         }
     }

@@ -50,6 +50,12 @@ public class ShapelessWalker implements Walker {
     }
 
     public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin) {
+        return walk(level, player, origin, true);
+    }
+
+    @Override
+    public HashSet<BlockPos> walk(Level level, Player player, BlockPos origin,
+            boolean distinguishDeepslateOres) {
         HashSet<BlockPos> potentialBrokenBlocks = new HashSet<>();
 
         potentialBrokenBlocks.add(origin);
@@ -64,24 +70,41 @@ public class ShapelessWalker implements Walker {
             return potentialBrokenBlocks;
         }
 
-        searchBlocks(player, level, origin, origin, potentialBrokenBlocks, originState.getBlock());
+        searchBlocks(player,
+                level,
+                origin,
+                origin,
+                potentialBrokenBlocks,
+                originState.getBlock(),
+                distinguishDeepslateOres
+        );
         VISITED.clear();
 
         return potentialBrokenBlocks;
     }
 
     private void searchBlocks(Player player, Level level, BlockPos myPos, BlockPos absoluteOrigin,
-            HashSet<BlockPos> blocksToCollapse, Block originBlock) {
+            HashSet<BlockPos> blocksToCollapse, Block originBlock, boolean distinguishDeepslateOres) {
         if (VISITED.size() >= Liteminer.CONFIG.blockBreakLimit.get()) return;
         if (VISITED.contains(myPos)) return;
-        if (!BlockFamily.matches(originBlock, level.getBlockState(myPos).getBlock())) return;
+        if (!BlockFamily.matches(originBlock,
+                level.getBlockState(myPos).getBlock(),
+                distinguishDeepslateOres
+        )) return;
         if (!shouldMine(player, level, myPos)) return;
 
         blocksToCollapse.add(myPos);
         VISITED.add(myPos);
 
         for (var neighborPos : getNeighbors(myPos, absoluteOrigin)) {
-            searchBlocks(player, level, neighborPos, absoluteOrigin, blocksToCollapse, originBlock);
+            searchBlocks(player,
+                    level,
+                    neighborPos,
+                    absoluteOrigin,
+                    blocksToCollapse,
+                    originBlock,
+                    distinguishDeepslateOres
+            );
         }
     }
 

@@ -77,9 +77,7 @@ public class HUD {
                 } else if (y < 0) {
                     LiteminerClient.shapes.nextItem();
                 }
-                new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(LiteminerClient.isVeinMining(),
-                        LiteminerClient.shapes.getCurrentIndex()
-                ).sendToServer();
+                LiteminerClient.sendStateToServer(LiteminerClient.isVeinMining());
             }
             if (!LiteminerClient.CONFIG.showHUD.get()) {
                 assert minecraft.player != null;

@@ -87,7 +87,11 @@ public class BlockHighlightRenderer {
         BlockPos origin = ShapelessWalker.raytraceBlock(level, player);
 
         HashSet<BlockPos> blocksToHighlight =
-                walker.walk(level, player, ShapelessWalker.raytrace(level, player).getBlockPos());
+                walker.walk(level,
+                        player,
+                        ShapelessWalker.raytrace(level, player).getBlockPos(),
+                        LiteminerClient.CONFIG.distinguishDeepslateOres.get()
+                );
         LiteminerClient.selectedBlocks = blocksToHighlight;
         if (blocksToHighlight.isEmpty()) {
             return true;

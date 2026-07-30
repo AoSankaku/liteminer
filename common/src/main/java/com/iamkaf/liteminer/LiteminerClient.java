@@ -63,17 +63,13 @@ public class LiteminerClient {
                     return;
                 }
 
-                new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(newState,
-                        shapes.getCurrentIndex()
-                ).sendToServer();
+                sendStateToServer(newState);
                 currentState = newState;
             }
             case TOGGLE -> {
                 if (KEY_MAPPING.consumeClick()) {
                     var newState = !isVeinMining();
-                    new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(newState,
-                            shapes.getCurrentIndex()
-                    ).sendToServer();
+                    sendStateToServer(newState);
                     currentState = newState;
                 }
             }
@@ -82,6 +78,20 @@ public class LiteminerClient {
 
     public static boolean isVeinMining() {
         return currentState;
+    }
+
+    public static void sendStateToServer(boolean keybindState) {
+        new LiteminerNetwork.Messages.C2SVeinmineKeybindChange(keybindState,
+                shapes.getCurrentIndex(),
+                CONFIG.distinguishDeepslateOres.get()
+        ).sendToServer();
+    }
+
+    public static void syncStateToServer() {
+        if (mc == null || mc.getConnection() == null) {
+            return;
+        }
+        sendStateToServer(isVeinMining());
     }
 
     public static long getLastChange() {

@@ -18,6 +18,9 @@
   "liteminer.config.hud_scale": "HUD Scale",
   "liteminer.config.hud_scale.tooltip": "Changes how big the HUD elements are.",
 
+  "liteminer.config.distinguish_deepslate_ores": "Separate Deepslate Ores",
+  "liteminer.config.distinguish_deepslate_ores.tooltip": "Prevents regular and deepslate variants of the same ore from being vein mined together.",
+
   "liteminer.config.block_break_limit": "Block Break Limit",
   "liteminer.config.block_break_limit.tooltip": "Upper limit to how many blocks can be broken at a time.",
 

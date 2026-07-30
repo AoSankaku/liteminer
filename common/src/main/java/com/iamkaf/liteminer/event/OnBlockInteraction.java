@@ -64,7 +64,11 @@ public class OnBlockInteraction {
 
         Walker walker = WALKERS.get(playerState.getShape());
 
-        var blocks = walker.walk(level, player, blockPos)
+        var blocks = walker.walk(level,
+                        player,
+                        blockPos,
+                        playerState.getDistinguishDeepslateOres()
+                )
                 .stream()
                 .sorted(Comparator.comparingInt(p -> p.distManhattan(blockPos)))
                 .toList();

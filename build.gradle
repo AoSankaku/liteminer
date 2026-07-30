@@ -11,6 +11,10 @@ apply from: "https://raw.githubusercontent.com/iamkaf/modresources/refs/heads/ma
 allprojects {
     repositories {
         maven {
+            name = "Shedaniel"
+            url = "https://maven.shedaniel.me/"
+        }
+        maven {
             name = "Fuzs Mod Resources"
             url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
         }

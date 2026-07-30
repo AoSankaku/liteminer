@@ -14,6 +14,11 @@ import java.util.HashSet;
 public interface Walker {
     HashSet<BlockPos> walk(Level level, Player player, BlockPos origin);
 
+    default HashSet<BlockPos> walk(Level level, Player player, BlockPos origin,
+            boolean distinguishDeepslateOres) {
+        return walk(level, player, origin);
+    }
+
     @SuppressWarnings("deprecation")
     default boolean shouldMine(Player player, Level level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);

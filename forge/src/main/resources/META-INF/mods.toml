@@ -39,6 +39,13 @@ versionRange = "[${amber_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
+[[dependencies.${mod_id}]]
+modId = "cloth_config"
+mandatory = false
+versionRange = "[11,12)"
+ordering = "AFTER"
+side = "CLIENT"
+
 [[mixins]]
 config = "${mod_id}.mixins.json"
 

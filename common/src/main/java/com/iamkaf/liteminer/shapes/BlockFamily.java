@@ -8,6 +8,16 @@ import java.util.Set;
 
 public class BlockFamily {
     private static final Map<Block, Set<Block>> BLOCK_MATCHES = new HashMap<>();
+    private static final Map<Block, Block> DEEPSLATE_ORE_VARIANTS = Map.ofEntries(
+            Map.entry(Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE),
+            Map.entry(Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE),
+            Map.entry(Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE),
+            Map.entry(Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE),
+            Map.entry(Blocks.REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE),
+            Map.entry(Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE),
+            Map.entry(Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE),
+            Map.entry(Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE)
+    );
 
     static {
         makeFamily(Blocks.RAW_IRON_BLOCK, Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE);
@@ -25,9 +35,13 @@ public class BlockFamily {
      * @param to   The block to compare with.
      * @return true if the blocks are either the same or part of the same family, false otherwise.
      */
-    public static boolean matches(Block from, Block to) {
+    public static boolean matches(Block from, Block to, boolean distinguishDeepslateOres) {
         if (to.equals(from)) {
             return true;
+        }
+
+        if (areRegularAndDeepslateVariants(from, to)) {
+            return !distinguishDeepslateOres;
         }
 
         if (BLOCK_MATCHES.containsKey(to)) {
@@ -40,6 +54,10 @@ public class BlockFamily {
         }
 
         return false;
+    }
+
+    private static boolean areRegularAndDeepslateVariants(Block from, Block to) {
+        return DEEPSLATE_ORE_VARIANTS.get(from) == to || DEEPSLATE_ORE_VARIANTS.get(to) == from;
     }
 
     /**

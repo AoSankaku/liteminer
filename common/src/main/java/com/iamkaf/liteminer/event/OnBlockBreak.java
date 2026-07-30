@@ -61,7 +61,11 @@ public class OnBlockBreak {
 
         Walker walker = WALKERS.get(playerState.getShape());
 
-        var blocks = walker.walk(level, player, absoluteOrigin)
+        var blocks = walker.walk(level,
+                        player,
+                        absoluteOrigin,
+                        playerState.getDistinguishDeepslateOres()
+                )
                 .stream()
                 .sorted(Comparator.comparingInt(p -> p.distManhattan(absoluteOrigin)))
                 .toList();
