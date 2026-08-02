@@ -27,7 +27,7 @@ describe.configure({
   ],
 });
 
-describe("Liteminer vein mining", () => {
+describe("Liteminer Delta vein mining", () => {
   test("mines a connected ore vein", async (ctx) => {
     const area = box({ x: 0, y: 69, z: 0 }, { x: 4, y: 73, z: 4 });
     try {
@@ -67,7 +67,7 @@ describe("Liteminer vein mining", () => {
         block(12, 70, 5),
         block(12, 71, 5),
       ]);
-      await ctx.client.command("/liteminer shape set 0");
+      await ctx.client.command("/liteminer_delta shape set 0");
       await ctx.runtime.wait(500);
       await ctx.client.lookAt({ x: 12.5, y: 70.5, z: 3.5 });
       await ctx.client.keyState(96, true);
@@ -83,7 +83,7 @@ describe("Liteminer vein mining", () => {
     try {
       await prepareCreativeTest(ctx, { x: 0, y: 70, z: 0 }, area, 24);
       await ctx.world.fill({ x: -4, y: 69, z: 0 }, { x: 44, y: 69, z: 6 }, "minecraft:stone");
-      await ctx.client.command("/liteminer shape set 0");
+      await ctx.client.command("/liteminer_delta shape set 0");
       await ctx.runtime.wait(500);
       await setBlocks(ctx, [
         block(0, 70, 2), block(-1, 70, 2), block(1, 70, 2),
@@ -97,7 +97,7 @@ describe("Liteminer vein mining", () => {
       await assertBlock(ctx, { x: 3, y: 70, z: 2 }, "minecraft:coal_ore");
       await ctx.client.screenshot("liteminer-shape-shapeless");
 
-      await ctx.client.command("/liteminer shape set 1");
+      await ctx.client.command("/liteminer_delta shape set 1");
       await ctx.runtime.wait(500);
       await setBlocks(ctx, [
         block(10, 70, 2), block(10, 70, 3), block(10, 70, 4), block(11, 70, 3),
@@ -110,7 +110,7 @@ describe("Liteminer vein mining", () => {
       await assertBlock(ctx, { x: 11, y: 70, z: 3 }, "minecraft:coal_ore");
       await ctx.client.screenshot("liteminer-shape-small-tunnel");
 
-      await ctx.client.command("/liteminer shape set 2");
+      await ctx.client.command("/liteminer_delta shape set 2");
       await ctx.runtime.wait(500);
       await setBlocks(ctx, [
         block(20, 70, 2), block(20, 71, 2), block(20, 72, 2),
@@ -127,7 +127,7 @@ describe("Liteminer vein mining", () => {
       await assertBlock(ctx, { x: 21, y: 72, z: 3 }, "minecraft:coal_ore");
       await ctx.client.screenshot("liteminer-shape-staircase-up");
 
-      await ctx.client.command("/liteminer shape set 3");
+      await ctx.client.command("/liteminer_delta shape set 3");
       await ctx.runtime.wait(500);
       await setBlocks(ctx, [
         block(30, 71, 2), block(30, 70, 2), block(30, 69, 2),
@@ -144,7 +144,7 @@ describe("Liteminer vein mining", () => {
       await assertBlock(ctx, { x: 31, y: 69, z: 3 }, "minecraft:coal_ore");
       await ctx.client.screenshot("liteminer-shape-staircase-down");
 
-      await ctx.client.command("/liteminer shape set 4");
+      await ctx.client.command("/liteminer_delta shape set 4");
       await ctx.runtime.wait(500);
       await ctx.world.fill({ x: 39, y: 69, z: 2 }, { x: 41, y: 71, z: 2 }, "minecraft:coal_ore");
       await ctx.world.setBlock({ x: 40, y: 70, z: 3 }, "minecraft:coal_ore");
@@ -153,7 +153,7 @@ describe("Liteminer vein mining", () => {
       await waitForAir(ctx, cuboidPositions({ x: 39, y: 69, z: 2 }, { x: 41, y: 71, z: 2 }));
       await assertBlock(ctx, { x: 40, y: 70, z: 3 }, "minecraft:coal_ore");
       await ctx.client.screenshot("liteminer-shape-3x3");
-      await ctx.client.command("/liteminer shape set 0");
+      await ctx.client.command("/liteminer_delta shape set 0");
     } finally {
       await cleanup(ctx, area, { x: 20, y: 70, z: 2 }, 24);
     }
@@ -166,7 +166,7 @@ describe("Liteminer vein mining", () => {
       await ctx.world.fill({ x: 46, y: 69, z: 0 }, { x: 86, y: 69, z: 6 }, "minecraft:stone");
       await ctx.client.keyState(96, true);
 
-      await ctx.client.command("/liteminer shape set 2");
+      await ctx.client.command("/liteminer_delta shape set 2");
       await ctx.runtime.wait(500);
       await setBlocks(ctx, [
         block(60, 70, 2), block(60, 71, 2), block(60, 72, 2),
@@ -181,7 +181,7 @@ describe("Liteminer vein mining", () => {
       await assertBlock(ctx, { x: 61, y: 72, z: 2 }, "minecraft:coal_ore");
       await ctx.client.screenshot("liteminer-staircase-up-hit-face-over-yaw");
 
-      await ctx.client.command("/liteminer shape set 3");
+      await ctx.client.command("/liteminer_delta shape set 3");
       await ctx.runtime.wait(500);
       await setBlocks(ctx, [
         block(80, 70, 2), block(80, 69, 2), block(80, 71, 2),
@@ -205,7 +205,7 @@ describe("Liteminer vein mining", () => {
     try {
       await prepareCreativeTest(ctx, { x: 70, y: 70, z: 0 }, area, 24);
       await ctx.world.fill({ x: 66, y: 69, z: 0 }, { x: 74, y: 69, z: 4 }, "minecraft:stone");
-      await ctx.client.command("/liteminer shape set 2");
+      await ctx.client.command("/liteminer_delta shape set 2");
       await ctx.runtime.wait(500);
       await ctx.client.keyState(96, true);
       await ctx.runtime.wait(1_200);
@@ -232,7 +232,7 @@ describe("Liteminer vein mining", () => {
     try {
       await prepareCreativeTest(ctx, { x: 90, y: 70, z: 0 }, area, 24);
       await ctx.world.fill({ x: 86, y: 69, z: 0 }, { x: 96, y: 69, z: 6 }, "minecraft:stone");
-      await ctx.client.command("/liteminer shape set 2");
+      await ctx.client.command("/liteminer_delta shape set 2");
       await ctx.runtime.wait(500);
       await ctx.client.keyState(96, true);
       await ctx.runtime.wait(1_200);
@@ -302,7 +302,7 @@ async function prepareSurvivalXpTest(ctx: TeaKitTestContext, area: Area) {
   await ctx.client.closeMenus();
   await ctx.client.keyState(96, false);
   await ctx.runtime.wait(250);
-  await ctx.client.command("/liteminer shape set 0");
+  await ctx.client.command("/liteminer_delta shape set 0");
   await ctx.runtime.wait(500);
   await ctx.player.reset({ gameMode: "survival", inventory: "clear" });
   await ctx.player.teleport({ x: 0, y: 70, z: 0 });

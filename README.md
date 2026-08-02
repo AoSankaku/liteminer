@@ -1,12 +1,13 @@
-# Liteminer
+# Liteminer Delta
 
-A veinmining mod for Minecraft.
+An independently maintained fork of [Liteminer](https://modrinth.com/mod/liteminer), originally created by iamkaf.
+Liteminer Delta is distributed under the original MIT license.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## ⛏️ About
 
-Liteminer adds configurable vein mining with multiple mining shapes, a HUD, and cross-loader support.
+Liteminer Delta adds configurable vein mining with multiple mining shapes, a HUD, and cross-loader support.
 Built using a multi-loader architecture supporting Fabric, Forge (scaffolded), and NeoForge.
 
 ## 📦 Features
@@ -16,9 +17,12 @@ Built using a multi-loader architecture supporting Fabric, Forge (scaffolded), a
 - HUD + keybind workflow
 - Tag-based block/tool allow/deny lists (compatible with FTB Ultimine tags)
 
+Liteminer Delta uses the `liteminer_delta:*` tag namespace and continues to read legacy
+`liteminer:*` tags for compatibility with existing worlds, datapacks, and modpacks.
+
 ## 🗂️ Monorepo Structure
 
-This repository contains all Minecraft versions of Liteminer:
+This repository contains all Minecraft versions of Liteminer Delta:
 
 ```
 liteminer/
@@ -76,7 +80,7 @@ Built jars will be in `<version>/<loader>/build/libs/`
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/iamkaf/liteminer.git
+   git clone https://github.com/AoSankaku/liteminer.git
    cd liteminer
    ```
 
@@ -88,7 +92,7 @@ Built jars will be in `<version>/<loader>/build/libs/`
 
 ## 🧩 Addon API
 
-Liteminer exposes a public addon API under `com.iamkaf.liteminer.api` on the active `26.1.2` line.
+Liteminer exposes a public addon API under `net.aosankaku.liteminerdelta.api` on the active `26.1.2` line.
 The API is intended for mods that need to inspect player state, register custom mining shapes, react to
 veinmine operations, or adjust the client HUD.
 
@@ -97,7 +101,7 @@ veinmine operations, or adjust the client HUD.
 Use `LiteminerApi` for server-side player state:
 
 ```java
-import com.iamkaf.liteminer.api.LiteminerApi;
+import net.aosankaku.liteminerdelta.api.LiteminerApi;
 
 boolean active = LiteminerApi.isVeinmining(player);
 int shapeIndex = LiteminerApi.getSelectedShapeIndex(player);
@@ -110,12 +114,12 @@ You can also set a player's selected shape by id:
 ```java
 import net.minecraft.resources.Identifier;
 
-LiteminerApi.setSelectedShape(player, Identifier.fromNamespaceAndPath("liteminer", "three_by_three"));
+LiteminerApi.setSelectedShape(player, Identifier.fromNamespaceAndPath("liteminer_delta", "three_by_three"));
 ```
 
 ### Veinmine Events
 
-Server-side lifecycle events live in `com.iamkaf.liteminer.api.event.LiteminerEvents`.
+Server-side lifecycle events live in `net.aosankaku.liteminerdelta.api.event.LiteminerEvents`.
 
 Available events:
 
@@ -126,7 +130,7 @@ Available events:
 Example:
 
 ```java
-import com.iamkaf.liteminer.api.event.LiteminerEvents;
+import net.aosankaku.liteminerdelta.api.event.LiteminerEvents;
 import net.minecraft.world.InteractionResult;
 
 LiteminerEvents.ALLOW_BLOCK.register(context -> {
@@ -147,7 +151,7 @@ The after-event context includes the full candidate list, processed blocks, and 
 Register custom shapes through `LiteminerShapes`:
 
 ```java
-import com.iamkaf.liteminer.api.shape.LiteminerShapes;
+import net.aosankaku.liteminerdelta.api.shape.LiteminerShapes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -178,12 +182,12 @@ Built-in shape ids are exposed on `LiteminerShapes`:
 
 ### Client HUD Event
 
-Client-side presentation events live in `com.iamkaf.liteminer.api.event.LiteminerClientEvents`.
+Client-side presentation events live in `net.aosankaku.liteminerdelta.api.event.LiteminerClientEvents`.
 
 Use `MODIFY_HUD` to change or hide Liteminer's default HUD:
 
 ```java
-import com.iamkaf.liteminer.api.event.LiteminerClientEvents;
+import net.aosankaku.liteminerdelta.api.event.LiteminerClientEvents;
 import net.minecraft.network.chat.Component;
 
 LiteminerClientEvents.MODIFY_HUD.register(context -> {
@@ -201,12 +205,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **CurseForge**: https://www.curseforge.com/minecraft/mc-mods/liteminer
-- **Modrinth**: https://modrinth.com/mod/liteminer
-- **Issues**: https://github.com/iamkaf/liteminer/issues
+- **Issues**: https://github.com/AoSankaku/liteminer/issues
+- **Upstream project**: https://modrinth.com/mod/liteminer
 
 ## 👤 Author
 
-**iamkaf**
+**AoSankaku**
 
-- GitHub: [@iamkaf](https://github.com/iamkaf)
+- GitHub: [@AoSankaku](https://github.com/AoSankaku)
+
+Original Liteminer author: [iamkaf](https://github.com/iamkaf)

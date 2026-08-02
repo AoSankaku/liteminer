@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.aosankaku.liteminerdelta.forge.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

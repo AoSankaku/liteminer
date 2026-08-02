@@ -8,19 +8,19 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://github.com/iamkaf/liteminer",
-        "issues": "https://github.com/iamkaf/liteminer/issues",
-        "sources": "https://github.com/iamkaf/liteminer"
+        "homepage": "https://github.com/AoSankaku/liteminer",
+        "issues": "https://github.com/AoSankaku/liteminer/issues",
+        "sources": "https://github.com/AoSankaku/liteminer"
     },
     "license": "${license}",
     "icon": "assets/${mod_id}/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.iamkaf.liteminer.fabric.LiteminerFabric"
+            "net.aosankaku.liteminerdelta.fabric.LiteminerFabric"
         ],
         "client": [
-            "com.iamkaf.liteminer.fabric.client.LiteminerFabricClient"
+            "net.aosankaku.liteminerdelta.fabric.client.LiteminerFabricClient"
         ]
     },
     "mixins": [

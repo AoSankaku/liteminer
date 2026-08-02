@@ -1,0 +1,59 @@
+package net.aosankaku.liteminerdelta.event;
+
+import net.aosankaku.liteminerdelta.Liteminer;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+
+public final class FoodExhaustion {
+    private static final Identifier FARMERS_DELIGHT_NOURISHMENT =
+            Identifier.fromNamespaceAndPath("farmersdelight", "nourishment");
+
+    private FoodExhaustion() {
+    }
+
+    static boolean canUseLiteminer(Player player) {
+        return player.isCreative()
+                || !isHungerRequired()
+                || player.getFoodData().getFoodLevel() > 0;
+    }
+
+    static boolean canUseLiteminerOrNotify(ServerPlayer player) {
+        if (canUseLiteminer(player)) {
+            return true;
+        }
+
+        player.sendSystemMessage(Component.translatable("message.liteminer_delta.insufficient_hunger")
+                .withStyle(ChatFormatting.RED));
+        return false;
+    }
+
+    public static boolean isHungerRequired() {
+        return !Liteminer.CONFIG.allowVeinMiningAtZeroHunger.get() && isEnabled();
+    }
+
+    static void apply(Player player) {
+        if (!isEnabled() || hasFarmersDelightNourishment(player)) {
+            return;
+        }
+
+        player.causeFoodExhaustion(getExhaustion());
+    }
+
+    private static boolean isEnabled() {
+        return Liteminer.CONFIG.foodExhaustionEnabled.get() && getExhaustion() > 0;
+    }
+
+    private static float getExhaustion() {
+        return Liteminer.CONFIG.foodExhaustion.get().floatValue();
+    }
+
+    private static boolean hasFarmersDelightNourishment(Player player) {
+        return BuiltInRegistries.MOB_EFFECT.get(FARMERS_DELIGHT_NOURISHMENT)
+                .map(player::hasEffect)
+                .orElse(false);
+    }
+}

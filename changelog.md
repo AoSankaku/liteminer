@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 3.1.3
 
+### Changed
+
+- Renamed the maintained fork to Liteminer Delta.
+- Changed the mod id to `liteminer_delta` and the Java namespace to `net.aosankaku.liteminerdelta`.
+- Preserved compatibility with the legacy `liteminer:*` tags and FTB Ultimine tags.
+
 ### Fixed
 
 - The HUD block count and shape text now keep updating when block highlights are disabled.
@@ -192,11 +198,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First stable release of Liteminer.
 - Added tags for blacklisting blocks and tools:
   - Item tags:
-    - `liteminer:excluded_tools`
-    - `liteminer:included_tools`
+    - `liteminer_delta:excluded_tools`
+    - `liteminer_delta:included_tools`
   - Block tags:
-    - `liteminer:excluded_blocks`
-    - `liteminer:block_whitelist`
+    - `liteminer_delta:excluded_blocks`
+    - `liteminer_delta:block_whitelist`
   - Compatibility note: tags are compatible with FTB Ultimine tags.
 
 ## 0.5.2-beta.9

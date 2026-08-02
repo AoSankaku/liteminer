@@ -1,5 +1,5 @@
-modId = "liteminer"
-projectKey = "liteminer"
+modId = "liteminer_delta"
+projectKey = "liteminer_delta"
 
 [defaults]
 launcher = "gradle"
@@ -11,15 +11,15 @@ maxWorkers = 1
 configureOnDemand = false
 
 [defaults.gradleProperties]
-"liteminer.withTeaKit" = "true"
+"liteminer_delta.withTeaKit" = "true"
 
 [defaults.systemProperties]
-"liteminer.withTeaKit" = "true"
+"liteminer_delta.withTeaKit" = "true"
 "teakit.enabled" = "true"
 "teakit.autoWorld" = "true"
 "teakit.runtimeApi.required" = "1"
-"teakit.worldId" = "liteminer_teakit"
-"teakit.worldName" = "Liteminer TeaKit"
+"teakit.worldId" = "liteminer_delta_teakit"
+"teakit.worldName" = "Liteminer Delta TeaKit"
 
 [nodes."1.21.11-fabric"]
 loader = "fabric"
