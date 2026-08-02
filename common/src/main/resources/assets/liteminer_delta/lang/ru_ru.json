@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "Добыча жилы",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "Без формы",
+  "shape.liteminer_delta.small_tunnel": "Малый тоннель",
+  "shape.liteminer_delta.staircase_up": "Лестница вверх",
+  "shape.liteminer_delta.staircase_down": "Лестница вниз",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s блоков",
+  "hud.liteminer_delta.selected_blocks_singular": "1 блок",
+  "hud.liteminer_delta.insufficient_hunger": "Недостаточно сытости",
+  "hud.liteminer_delta.changed_shape": "Форма добычи изменена [%s]",
+  "message.liteminer_delta.insufficient_hunger": "Недостаточно сытости для добычи жилы.",
+
+  "liteminer_delta.configuration.title": "Настройки Liteminer Delta",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Настройки Liteminer Delta",
+
+  "liteminer_delta.config.key_mode": "Режим клавиши",
+  "liteminer_delta.config.key_mode.tooltip": "В режиме удержания держите клавишу нажатой. В режиме переключения нажимайте клавишу для включения или выключения добычи жилы.",
+
+  "liteminer_delta.config.show_hud": "Показывать интерфейс",
+  "liteminer_delta.config.show_hud.tooltip": "Показывает количество выбранных блоков и форму добычи.",
+
+  "liteminer_delta.config.hud_scale": "Масштаб интерфейса",
+  "liteminer_delta.config.hud_scale.tooltip": "Изменяет размер элементов интерфейса.",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "Разделять глубинные руды",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Не позволяет добывать обычную и глубинную разновидности одной руды вместе.",
+  "liteminer_delta.config.distinguish_stone_variants": "Разделять варианты камня",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Не позволяет добывать вместе блоки с одним тегом базового камня, например камень, гранит, диорит и андезит.",
+
+  "liteminer_delta.config.block_break_limit": "Лимит блоков",
+  "liteminer_delta.config.block_break_limit.tooltip": "Максимальное количество блоков, разрушаемых за один раз.",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "Требовать подходящий инструмент",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "Блоки можно разрушать только подходящим инструментом.",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "Увеличивать время добычи",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "Увеличивает время, необходимое для добычи жилы.",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "Модификатор времени добычи",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "Определяет увеличение времени добычи. Чем выше значение, тем дольше добыча.",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "Расходовать сытость",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "Расходует сытость за каждый добытый блок.",
+  "liteminer_delta.config.food_exhaustion": "Величина истощения",
+  "liteminer_delta.config.food_exhaustion.tooltip": "Истощение, добавляемое за каждый разрушенный блок.",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "Разрешить добычу без сытости",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "Разрешает добычу жилы при пустой шкале сытости.",
+
+  "liteminer_delta.config.prevent_tool_breaking": "Предотвращать поломку инструмента",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "Останавливает добычу жилы, когда у инструмента остаётся 1 единица прочности."
+}

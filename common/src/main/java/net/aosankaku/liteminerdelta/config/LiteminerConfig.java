@@ -1,0 +1,52 @@
+package net.aosankaku.liteminerdelta.config;
+
+import net.minecraftforge.common.ForgeConfigSpec;
+
+public final class LiteminerConfig {
+    public final ForgeConfigSpec.ConfigValue<Boolean> requireCorrectToolEnabled;
+    public final ForgeConfigSpec.ConfigValue<Boolean> preventToolBreaking;
+    public final ForgeConfigSpec.ConfigValue<Integer> blockBreakLimit;
+    public final ForgeConfigSpec.ConfigValue<Boolean> harvestTimePerBlockModifierEnabled;
+    public final ForgeConfigSpec.ConfigValue<Double> harvestTimePerBlockModifier;
+    public final ForgeConfigSpec.ConfigValue<Boolean> foodExhaustionEnabled;
+    public final ForgeConfigSpec.ConfigValue<Double> foodExhaustion;
+    public final ForgeConfigSpec.ConfigValue<Boolean> allowVeinMiningAtZeroHunger;
+
+//    public final ForgeConfigSpec.ConfigValue<Boolean> requireFood;
+//    public final ForgeConfigSpec.ConfigValue<Boolean> useToolWhitelist;
+//    public final ForgeConfigSpec.ConfigValue<List<ResourceLocation>> toolWhitelist;
+//    public final ForgeConfigSpec.ConfigValue<Boolean> useBlockWhitelist;
+//    public final ForgeConfigSpec.ConfigValue<List<Block>> blockWhitelist;
+
+    public LiteminerConfig(ForgeConfigSpec.Builder builder) {
+        preventToolBreaking = builder.translation("liteminer_delta.config.prevent_tool_breaking")
+                .comment(":)")
+                .define("prevent_tool_breaking", true);
+        requireCorrectToolEnabled = builder.translation("liteminer_delta.config.require_correct_tool_enabled")
+                .comment(":)")
+                .define("require_correct_tool_enabled", false);
+
+        blockBreakLimit = builder.translation("liteminer_delta.config.block_break_limit")
+                .comment(":)")
+                .defineInRange("block_break_limit", 64, 1, 2048);
+
+        harvestTimePerBlockModifierEnabled =
+                builder.translation("liteminer_delta.config.harvest_time_per_block_modifier_enabled")
+                        .comment(":)")
+                        .define("harvest_time_per_block_modifier_enabled", true);
+        harvestTimePerBlockModifier = builder.translation("liteminer_delta.config.harvest_time_per_block_modifier")
+                .comment(":)")
+                .defineInRange("harvest_time_per_block_modifier", 2d, 1.0d, 10d);
+
+        foodExhaustionEnabled = builder.translation("liteminer_delta.config.food_exhaustion_enabled")
+                .comment(":)")
+                .define("food_exhaustion_enabled", true);
+        foodExhaustion = builder.translation("liteminer_delta.config.food_exhaustion")
+                .comment(":)")
+                .defineInRange("food_exhaustion", 0.2d, 0.0d, 1d);
+        allowVeinMiningAtZeroHunger =
+                builder.translation("liteminer_delta.config.allow_vein_mining_at_zero_hunger")
+                        .comment("Allows vein mining when the player's food level is zero.")
+                        .define("allow_vein_mining_at_zero_hunger", false);
+    }
+}

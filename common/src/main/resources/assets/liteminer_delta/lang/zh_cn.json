@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "连锁挖掘",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "无固定形状",
+  "shape.liteminer_delta.small_tunnel": "小型隧道",
+  "shape.liteminer_delta.staircase_up": "向上阶梯",
+  "shape.liteminer_delta.staircase_down": "向下阶梯",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s 个方块",
+  "hud.liteminer_delta.selected_blocks_singular": "1 个方块",
+  "hud.liteminer_delta.insufficient_hunger": "饥饿值不足",
+  "hud.liteminer_delta.changed_shape": "已更改挖掘形状 [%s]",
+  "message.liteminer_delta.insufficient_hunger": "饥饿值不足，无法进行连锁挖掘。",
+
+  "liteminer_delta.configuration.title": "Liteminer Delta 配置",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Liteminer Delta 配置",
+
+  "liteminer_delta.config.key_mode": "按键模式",
+  "liteminer_delta.config.key_mode.tooltip": "在按住模式下，需要一直按住按键；在切换模式下，按下按键即可开启或关闭连锁挖掘。",
+
+  "liteminer_delta.config.show_hud": "显示 HUD",
+  "liteminer_delta.config.show_hud.tooltip": "显示已选择的方块数量和挖掘形状。",
+
+  "liteminer_delta.config.hud_scale": "HUD 缩放",
+  "liteminer_delta.config.hud_scale.tooltip": "调整 HUD 元素的大小。",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "区分深层矿石",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "防止普通矿石与相同种类的深层矿石被一起挖掘。",
+  "liteminer_delta.config.distinguish_stone_variants": "区分石材变种",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "防止石头、花岗岩、闪长岩和安山岩等同属基础石材标签的方块被一起挖掘。",
+
+  "liteminer_delta.config.block_break_limit": "方块破坏上限",
+  "liteminer_delta.config.block_break_limit.tooltip": "一次最多可破坏的方块数量。",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "需要正确工具",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "只有手持合适的工具时才能破坏方块。",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "增加挖掘时间",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "连锁挖掘时增加所需的挖掘时间。",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "挖掘时间修正值",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "控制挖掘时间的增加量。数值越大，挖掘所需时间越长。",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "消耗饥饿值",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "每挖掘一个方块都会消耗饥饿值。",
+  "liteminer_delta.config.food_exhaustion": "饥饿消耗量",
+  "liteminer_delta.config.food_exhaustion.tooltip": "每破坏一个方块所增加的消耗量。",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "允许空腹连锁挖掘",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "饥饿栏为空时仍允许进行连锁挖掘。",
+
+  "liteminer_delta.config.prevent_tool_breaking": "防止工具损坏",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "当工具只剩 1 点耐久度时停止连锁挖掘。"
+}

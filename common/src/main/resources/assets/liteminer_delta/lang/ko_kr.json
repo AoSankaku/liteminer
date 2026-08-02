@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "광맥 채굴",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "자유 형태",
+  "shape.liteminer_delta.small_tunnel": "작은 터널",
+  "shape.liteminer_delta.staircase_up": "위쪽 계단",
+  "shape.liteminer_delta.staircase_down": "아래쪽 계단",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s개 블록",
+  "hud.liteminer_delta.selected_blocks_singular": "블록 1개",
+  "hud.liteminer_delta.insufficient_hunger": "허기가 부족합니다",
+  "hud.liteminer_delta.changed_shape": "채굴 형태 변경 [%s]",
+  "message.liteminer_delta.insufficient_hunger": "허기가 부족하여 광맥 채굴을 할 수 없습니다.",
+
+  "liteminer_delta.configuration.title": "Liteminer Delta 설정",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Liteminer Delta 설정",
+
+  "liteminer_delta.config.key_mode": "키 작동 방식",
+  "liteminer_delta.config.key_mode.tooltip": "누르기 모드에서는 키를 누르고 있는 동안만 작동합니다. 전환 모드에서는 키를 누를 때마다 광맥 채굴이 켜지거나 꺼집니다.",
+
+  "liteminer_delta.config.show_hud": "HUD 표시",
+  "liteminer_delta.config.show_hud.tooltip": "선택된 블록 수와 채굴 형태를 표시합니다.",
+
+  "liteminer_delta.config.hud_scale": "HUD 크기",
+  "liteminer_delta.config.hud_scale.tooltip": "HUD 요소의 표시 크기를 변경합니다.",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "심층암 광석 구분",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "일반 광석과 같은 종류의 심층암 광석이 함께 채굴되지 않도록 합니다.",
+  "liteminer_delta.config.distinguish_stone_variants": "석재 변형 구분",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "돌, 화강암, 섬록암, 안산암 등 같은 기반 석재 태그의 블록이 함께 채굴되지 않도록 합니다.",
+
+  "liteminer_delta.config.block_break_limit": "블록 파괴 제한",
+  "liteminer_delta.config.block_break_limit.tooltip": "한 번에 파괴할 수 있는 최대 블록 수입니다.",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "올바른 도구 필요",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "적합한 도구를 들고 있을 때만 블록을 파괴할 수 있습니다.",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "채굴 시간 증가",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "광맥 채굴에 필요한 시간을 증가시킵니다.",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "채굴 시간 보정값",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "채굴 시간 증가량을 조절합니다. 값이 높을수록 채굴 시간이 길어집니다.",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "허기 소모",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "채굴한 블록마다 허기를 소모합니다.",
+  "liteminer_delta.config.food_exhaustion": "허기 소모량",
+  "liteminer_delta.config.food_exhaustion.tooltip": "블록 하나를 파괴할 때 적용되는 소모량입니다.",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "허기 0에서 광맥 채굴 허용",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "허기 게이지가 비어 있어도 광맥 채굴을 허용합니다.",
+
+  "liteminer_delta.config.prevent_tool_breaking": "도구 파손 방지",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "도구의 내구도가 1이 되면 광맥 채굴을 중지합니다."
+}

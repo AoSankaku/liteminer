@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "Wydobywanie żyły",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "Bez kształtu",
+  "shape.liteminer_delta.small_tunnel": "Mały tunel",
+  "shape.liteminer_delta.staircase_up": "Schody w górę",
+  "shape.liteminer_delta.staircase_down": "Schody w dół",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s bloków",
+  "hud.liteminer_delta.selected_blocks_singular": "1 blok",
+  "hud.liteminer_delta.insufficient_hunger": "Zbyt niski poziom głodu",
+  "hud.liteminer_delta.changed_shape": "Zmieniono kształt wydobycia [%s]",
+  "message.liteminer_delta.insufficient_hunger": "Poziom głodu jest zbyt niski, aby wydobyć całą żyłę.",
+
+  "liteminer_delta.configuration.title": "Konfiguracja Liteminer Delta",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Konfiguracja Liteminer Delta",
+
+  "liteminer_delta.config.key_mode": "Tryb klawisza",
+  "liteminer_delta.config.key_mode.tooltip": "W trybie przytrzymania trzymaj klawisz podczas wydobycia. W trybie przełączania naciśnij klawisz, aby włączyć lub wyłączyć wydobywanie żyły.",
+
+  "liteminer_delta.config.show_hud": "Pokaż interfejs",
+  "liteminer_delta.config.show_hud.tooltip": "Pokazuje liczbę wybranych bloków i kształt wydobycia.",
+
+  "liteminer_delta.config.hud_scale": "Skala interfejsu",
+  "liteminer_delta.config.hud_scale.tooltip": "Zmienia rozmiar elementów interfejsu.",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "Oddziel rudy z łupku",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Zapobiega wspólnemu wydobywaniu zwykłych rud i ich wariantów z głębokiego łupku.",
+  "liteminer_delta.config.distinguish_stone_variants": "Oddziel warianty kamienia",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Zapobiega wspólnemu wydobywaniu bloków z tego samego tagu skały bazowej, takich jak kamień, granit, dioryt i andezyt.",
+
+  "liteminer_delta.config.block_break_limit": "Limit bloków",
+  "liteminer_delta.config.block_break_limit.tooltip": "Maksymalna liczba bloków niszczonych jednocześnie.",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "Wymagaj właściwego narzędzia",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "Bloki można niszczyć tylko odpowiednim narzędziem.",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "Zwiększony czas wydobycia",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "Zwiększa czas potrzebny na wydobycie całej żyły.",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "Modyfikator czasu wydobycia",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "Określa wzrost czasu wydobycia. Wyższe wartości wydłużają wydobycie.",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "Zużywaj głód",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "Zużywa głód za każdy wydobyty blok.",
+  "liteminer_delta.config.food_exhaustion": "Wartość wyczerpania",
+  "liteminer_delta.config.food_exhaustion.tooltip": "Wyczerpanie nakładane za każdy zniszczony blok.",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "Zezwól na wydobycie bez głodu",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "Pozwala wydobywać żyły przy pustym pasku głodu.",
+
+  "liteminer_delta.config.prevent_tool_breaking": "Zapobiegaj zniszczeniu narzędzia",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "Zatrzymuje wydobycie żyły, gdy narzędziu pozostaje 1 punkt wytrzymałości."
+}

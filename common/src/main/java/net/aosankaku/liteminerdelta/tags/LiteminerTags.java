@@ -1,0 +1,44 @@
+package net.aosankaku.liteminerdelta.tags;
+
+import net.aosankaku.liteminerdelta.Liteminer;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+
+public class LiteminerTags {
+    private static final String LEGACY_NAMESPACE = "liteminer";
+
+    private static TagKey<Item> createItemTag(String namespace, String path) {
+        return TagKey.create(Registries.ITEM, new ResourceLocation(namespace, path));
+    }
+
+    private static TagKey<Block> createBlockTag(String namespace, String path) {
+        return TagKey.create(Registries.BLOCK, new ResourceLocation(namespace, path));
+    }
+
+    public static class Items {
+        public static final TagKey<Item> EXCLUDED_TOOLS = createItemTag(Liteminer.MOD_ID, "excluded_tools");
+        public static final TagKey<Item> INCLUDED_TOOLS = createItemTag(Liteminer.MOD_ID, "included_tools");
+    }
+
+    public static class Blocks {
+        public static final TagKey<Block> EXCLUDED_BLOCKS = createBlockTag(Liteminer.MOD_ID, "excluded_blocks");
+        public static final TagKey<Block> BLOCK_WHITELIST = createBlockTag(Liteminer.MOD_ID, "block_whitelist");
+    }
+
+    public static class Legacy {
+        public static final TagKey<Item> EXCLUDED_TOOLS = createItemTag(LEGACY_NAMESPACE, "excluded_tools");
+        public static final TagKey<Item> INCLUDED_TOOLS = createItemTag(LEGACY_NAMESPACE, "included_tools");
+        public static final TagKey<Block> EXCLUDED_BLOCKS = createBlockTag(LEGACY_NAMESPACE, "excluded_blocks");
+        public static final TagKey<Block> BLOCK_WHITELIST = createBlockTag(LEGACY_NAMESPACE, "block_whitelist");
+    }
+
+    public static class Compat {
+        public static final TagKey<Item> EXCLUDED_TOOLS = createItemTag("ftbultimine", "excluded_tools");
+        public static final TagKey<Item> INCLUDED_TOOLS = createItemTag("ftbultimine", "included_tools");
+        public static final TagKey<Block> EXCLUDED_BLOCKS = createBlockTag("ftbultimine", "excluded_blocks");
+        public static final TagKey<Block> BLOCK_WHITELIST = createBlockTag("ftbultimine", "block_whitelist");
+    }
+}

@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "Mineração em veio",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "Sem formato",
+  "shape.liteminer_delta.small_tunnel": "Túnel pequeno",
+  "shape.liteminer_delta.staircase_up": "Escadaria para cima",
+  "shape.liteminer_delta.staircase_down": "Escadaria para baixo",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s blocos",
+  "hud.liteminer_delta.selected_blocks_singular": "1 bloco",
+  "hud.liteminer_delta.insufficient_hunger": "Nível de fome insuficiente",
+  "hud.liteminer_delta.changed_shape": "Formato de mineração alterado [%s]",
+  "message.liteminer_delta.insufficient_hunger": "Seu nível de fome está baixo demais para minerar o veio.",
+
+  "liteminer_delta.configuration.title": "Configuração do Liteminer Delta",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Configuração do Liteminer Delta",
+
+  "liteminer_delta.config.key_mode": "Modo da tecla",
+  "liteminer_delta.config.key_mode.tooltip": "No modo segurar, mantenha a tecla pressionada. No modo alternar, pressione a tecla para ativar ou desativar a mineração em veio.",
+
+  "liteminer_delta.config.show_hud": "Exibir interface",
+  "liteminer_delta.config.show_hud.tooltip": "Exibe o número de blocos selecionados e o formato de mineração.",
+
+  "liteminer_delta.config.hud_scale": "Escala da interface",
+  "liteminer_delta.config.hud_scale.tooltip": "Altera o tamanho dos elementos da interface.",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "Separar minérios de ardósia",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Impede que minérios normais e suas variantes de ardósia sejam minerados juntos.",
+  "liteminer_delta.config.distinguish_stone_variants": "Separar variantes de pedra",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Impede que blocos da mesma tag de pedra-base, como pedra, granito, diorito e andesito, sejam minerados juntos.",
+
+  "liteminer_delta.config.block_break_limit": "Limite de blocos",
+  "liteminer_delta.config.block_break_limit.tooltip": "Número máximo de blocos que podem ser quebrados de uma vez.",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "Exigir ferramenta correta",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "Os blocos só podem ser quebrados com a ferramenta adequada.",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "Aumentar tempo de mineração",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "Aumenta o tempo necessário para a mineração em veio.",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "Modificador do tempo de mineração",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "Controla o aumento do tempo de mineração. Valores maiores exigem mais tempo.",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "Consumir fome",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "Consome fome para cada bloco minerado.",
+  "liteminer_delta.config.food_exhaustion": "Quantidade de exaustão",
+  "liteminer_delta.config.food_exhaustion.tooltip": "Exaustão aplicada para cada bloco quebrado.",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "Permitir mineração sem fome",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "Permite mineração em veio com a barra de fome vazia.",
+
+  "liteminer_delta.config.prevent_tool_breaking": "Impedir quebra da ferramenta",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "Interrompe a mineração em veio quando a ferramenta chega a 1 de durabilidade."
+}

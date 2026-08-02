@@ -23,7 +23,7 @@
       "${client_entrypoint}"
     ],
     "fabric-datagen": [
-      "com.iamkaf.liteminer.fabric.LiteminerDatagen"
+      "net.aosankaku.liteminerdelta.fabric.LiteminerDatagen"
     ]
   },
   "mixins": [

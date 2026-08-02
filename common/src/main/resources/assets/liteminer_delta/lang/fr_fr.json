@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "Minage en veine",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "Sans forme",
+  "shape.liteminer_delta.small_tunnel": "Petit tunnel",
+  "shape.liteminer_delta.staircase_up": "Escalier montant",
+  "shape.liteminer_delta.staircase_down": "Escalier descendant",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s blocs",
+  "hud.liteminer_delta.selected_blocks_singular": "1 bloc",
+  "hud.liteminer_delta.insufficient_hunger": "Faim insuffisante",
+  "hud.liteminer_delta.changed_shape": "Forme de minage modifiée [%s]",
+  "message.liteminer_delta.insufficient_hunger": "Vous n'avez pas assez de nourriture pour miner en veine.",
+
+  "liteminer_delta.configuration.title": "Configuration de Liteminer Delta",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Configuration de Liteminer Delta",
+
+  "liteminer_delta.config.key_mode": "Mode de la touche",
+  "liteminer_delta.config.key_mode.tooltip": "En mode Maintenir, gardez la touche enfoncée. En mode Basculer, appuyez sur la touche pour activer ou désactiver le minage en veine.",
+
+  "liteminer_delta.config.show_hud": "Afficher l'interface",
+  "liteminer_delta.config.show_hud.tooltip": "Affiche le nombre de blocs sélectionnés et la forme de minage.",
+
+  "liteminer_delta.config.hud_scale": "Échelle de l'interface",
+  "liteminer_delta.config.hud_scale.tooltip": "Modifie la taille des éléments de l'interface.",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "Séparer les minerais des abîmes",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Empêche les minerais normaux et leurs variantes des abîmes d'être minés ensemble.",
+  "liteminer_delta.config.distinguish_stone_variants": "Séparer les variantes de pierre",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Empêche de miner ensemble les blocs du même tag de pierre de base, comme la roche, le granite, la diorite et l’andésite.",
+
+  "liteminer_delta.config.block_break_limit": "Limite de blocs",
+  "liteminer_delta.config.block_break_limit.tooltip": "Nombre maximal de blocs pouvant être détruits à la fois.",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "Outil approprié requis",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "Les blocs ne peuvent être détruits qu'avec l'outil approprié.",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "Augmenter le temps de minage",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "Augmente le temps nécessaire au minage en veine.",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "Modificateur du temps de minage",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "Contrôle l'augmentation du temps de minage. Une valeur élevée ralentit davantage le minage.",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "Consommer la nourriture",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "Consomme de la nourriture pour chaque bloc miné.",
+  "liteminer_delta.config.food_exhaustion": "Quantité d'épuisement",
+  "liteminer_delta.config.food_exhaustion.tooltip": "Épuisement appliqué pour chaque bloc détruit.",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "Autoriser le minage sans nourriture",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "Autorise le minage en veine lorsque la barre de nourriture est vide.",
+
+  "liteminer_delta.config.prevent_tool_breaking": "Empêcher la casse de l'outil",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "Arrête le minage en veine lorsque l'outil atteint 1 point de durabilité."
+}

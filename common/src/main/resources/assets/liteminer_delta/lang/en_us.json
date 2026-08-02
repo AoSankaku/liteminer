@@ -1,0 +1,54 @@
+{
+  "key.liteminer_delta.veinmine": "Vein Mine",
+  "key.categories.liteminer_delta": "Liteminer Delta",
+
+  "shape.liteminer_delta.shapeless": "Shapeless",
+  "shape.liteminer_delta.small_tunnel": "Small Tunnel",
+  "shape.liteminer_delta.staircase_up": "Staircase Up",
+  "shape.liteminer_delta.staircase_down": "Staircase Down",
+  "shape.liteminer_delta.three_by_three": "3x3",
+
+  "hud.liteminer_delta.selected_blocks": "%s Blocks",
+  "hud.liteminer_delta.selected_blocks_singular": "1 Block",
+  "hud.liteminer_delta.insufficient_hunger": "Not Enough Hunger",
+  "hud.liteminer_delta.changed_shape": "Changed Shape [%s]",
+  "message.liteminer_delta.insufficient_hunger": "Not enough hunger to vein mine.",
+
+  "liteminer_delta.configuration.title": "Liteminer Delta Configuration",
+  "liteminer_delta.configuration.section.liteminer_delta.common.toml.title": "Liteminer Delta Configuration",
+
+  "liteminer_delta.config.key_mode": "Key Mode",
+  "liteminer_delta.config.key_mode.tooltip": "In Hold mode you must keep holding the key to mine. In toggle mode you have to hit the key to toggle.",
+
+  "liteminer_delta.config.show_hud": "Show HUD",
+  "liteminer_delta.config.show_hud.tooltip": "Enables the text showing how many blocks you have selected and your mining shape.",
+
+  "liteminer_delta.config.hud_scale": "HUD Scale",
+  "liteminer_delta.config.hud_scale.tooltip": "Changes how big the HUD elements are.",
+
+  "liteminer_delta.config.distinguish_deepslate_ores": "Separate Deepslate Ores",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Prevents regular and deepslate variants of the same ore from being vein mined together.",
+  "liteminer_delta.config.distinguish_stone_variants": "Separate Stone Variants",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Prevents blocks in the same base stone tag, such as stone, granite, diorite, and andesite, from being vein mined together.",
+
+  "liteminer_delta.config.block_break_limit": "Block Break Limit",
+  "liteminer_delta.config.block_break_limit.tooltip": "Upper limit to how many blocks can be broken at a time.",
+
+  "liteminer_delta.config.require_correct_tool_enabled": "Require Correct Tool",
+  "liteminer_delta.config.require_correct_tool_enabled.tooltip": "If enabled, blocks can only be broken if holding the correct tool.",
+
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled": "Increased Harvesting Time",
+  "liteminer_delta.config.harvest_time_per_block_modifier_enabled.tooltip": "Increases the time it takes to break a block when vein mining.",
+  "liteminer_delta.config.harvest_time_per_block_modifier": "Harvesting Time Modifier",
+  "liteminer_delta.config.harvest_time_per_block_modifier.tooltip": "Modifier used to scale up the time it needs to mine a block. Higher values mean longer times to mine.",
+
+  "liteminer_delta.config.food_exhaustion_enabled": "Food Exhaustion",
+  "liteminer_delta.config.food_exhaustion_enabled.tooltip": "Causes your hunger to go down per block mined.",
+  "liteminer_delta.config.food_exhaustion": "Food Exhaustion Amount",
+  "liteminer_delta.config.food_exhaustion.tooltip": "How much food exhaustion to cause per block broken.",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "Allow Vein Mining at Zero Hunger",
+  "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "Allows vein mining when the hunger bar is empty.",
+
+  "liteminer_delta.config.prevent_tool_breaking": "Prevent Tool Breaking",
+  "liteminer_delta.config.prevent_tool_breaking.tooltip": "Stops vein mining when the durability of the tool gets to 1."
+}

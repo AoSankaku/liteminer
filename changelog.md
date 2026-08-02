@@ -1,6 +1,14 @@
-# Liteminer Changelog
+# Liteminer Delta Changelog
 
-See the full changelog at https://github.com/iamkaf/liteminer/commits/main
+See the full changelog at https://github.com/AoSankaku/liteminer/commits/1.20.1
+
+## 1.0.0-delta.1
+
+- Renamed the maintained fork to Liteminer Delta.
+- Changed the mod id to `liteminer_delta` and the Java namespace to `net.aosankaku.liteminerdelta`.
+- Preserved compatibility with the legacy `liteminer:*` tags and FTB Ultimine tags.
+
+## Upstream history
 
 ## 1.0.0
 
@@ -10,11 +18,11 @@ I've completed all the features I wanted to add to the mod when I started the pr
 
 - feat: added tags for blacklisting blocks and tools
     - Item Tags:
-        - `liteminer:excluded_tools` - items in this tag can't be used for litemining
-        - `liteminer:included_tools` - if `require_correct_tool_enabled` is true in common config, by default only "tool" items can be used (tiered items with durability); this can be used to allow extra items
+        - `liteminer_delta:excluded_tools` - items in this tag can't be used for litemining
+        - `liteminer_delta:included_tools` - if `require_correct_tool_enabled` is true in common config, by default only "tool" items can be used (tiered items with durability); this can be used to allow extra items
     - Block Tags
-        - `liteminer:excluded_blocks` - blocks in this tag may never be litemined
-        - `liteminer:block_whitelist` - if this tag is non-empty, then _only_ blocks in this tag may be litemined
+        - `liteminer_delta:excluded_blocks` - blocks in this tag may never be litemined
+        - `liteminer_delta:block_whitelist` - if this tag is non-empty, then _only_ blocks in this tag may be litemined
     - Note: these tags are compatible with the FTB Ultimine tags, so you can use the same tags for both mods if you already have a setup you like.
 
 ## 0.5.2-beta.9

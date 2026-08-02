@@ -1,0 +1,100 @@
+package net.aosankaku.liteminerdelta.shapes;
+
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.*;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class BlockFamily {
+    private static final Map<Block, Set<Block>> BLOCK_MATCHES = new HashMap<>();
+
+    static {
+        makeFamily(Blocks.RAW_IRON_BLOCK, Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE);
+        makeFamily(Blocks.RAW_GOLD_BLOCK, Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE);
+        makeFamily(Blocks.RAW_COPPER_BLOCK, Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE);
+    }
+
+    /**
+     * Determines if two blocks are considered a match based on predefined family relationships.
+     * Blocks are considered a match if they are either:
+     * 1. The same block (identity check).
+     * 2. Belong to the same "family" of blocks as defined in the BLOCK_MATCHES map.
+     *
+     * @param from The block being checked against.
+     * @param to   The block to compare with.
+     * @param distinguishDeepslateOres Whether differently hosted variants should be kept separate.
+     * @param distinguishStoneVariants Whether blocks in the same base stone tag should be kept separate.
+     * @return true if the blocks are either the same or part of the same family, false otherwise.
+     */
+    public static boolean matches(Block from, Block to, boolean distinguishDeepslateOres,
+            boolean distinguishStoneVariants) {
+        if (to.equals(from)) {
+            return true;
+        }
+
+        if (shareOreFamilyTag(from, to)) {
+            return !distinguishDeepslateOres;
+        }
+
+        if (shareBaseStoneTag(from, to)) {
+            return !distinguishStoneVariants;
+        }
+
+        if (BLOCK_MATCHES.containsKey(to)) {
+            var blockMatches = BLOCK_MATCHES.get(to);
+            return blockMatches.contains(from);
+        }
+
+        if ((from instanceof FlowerBlock || from instanceof TallGrassBlock || from instanceof DoublePlantBlock) && (to instanceof FlowerBlock || to instanceof TallGrassBlock || to instanceof DoublePlantBlock)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static boolean shareBaseStoneTag(Block from, Block to) {
+        var fromState = from.defaultBlockState();
+        var toState = to.defaultBlockState();
+        return (fromState.is(BlockTags.BASE_STONE_OVERWORLD) && toState.is(BlockTags.BASE_STONE_OVERWORLD))
+                || (fromState.is(BlockTags.BASE_STONE_NETHER) && toState.is(BlockTags.BASE_STONE_NETHER));
+    }
+
+    private static boolean shareOreFamilyTag(Block from, Block to) {
+        var fromOreTags = from.defaultBlockState()
+                .getTags()
+                .filter(tag -> isOreFamilyTag(tag.location().getNamespace(), tag.location().getPath()))
+                .collect(Collectors.toSet());
+
+        return !fromOreTags.isEmpty() && to.defaultBlockState()
+                .getTags()
+                .filter(tag -> isOreFamilyTag(tag.location().getNamespace(), tag.location().getPath()))
+                .anyMatch(fromOreTags::contains);
+    }
+
+    private static boolean isOreFamilyTag(String namespace, String path) {
+        boolean isHierarchicalOreTag = path.startsWith("ores/") && path.length() > "ores/".length();
+        if ("forge".equals(namespace)) {
+            return isHierarchicalOreTag;
+        }
+        if ("c".equals(namespace)) {
+            return isHierarchicalOreTag || (path.endsWith("_ores") && !"ores".equals(path));
+        }
+        return "minecraft".equals(namespace) && path.endsWith("_ores");
+    }
+
+    /**
+     * Creates a "family" of blocks that match with each other.
+     * This method ensures that each block in the provided list can be matched with every other block in
+     * the list.
+     *
+     * @param blocks The blocks that belong to the same family and should match with each other.
+     */
+    private static void makeFamily(Block... blocks) {
+        for (Block block : blocks) {
+            BLOCK_MATCHES.put(block, Set.of(blocks));
+        }
+    }
+}
