@@ -1,6 +1,10 @@
 {
     "hud.liteminer_delta.insufficient_hunger": "Not Enough Hunger",
     "message.liteminer_delta.insufficient_hunger": "Not enough hunger to vein mine.",
+    "message.liteminer_delta.server_unavailable": "Liteminer Delta is not available on this server.",
+    "liteminer_delta.config.auto_veinmine_ores": "Automatically Vein Mine Ores",
+    "liteminer_delta.config.auto_veinmine_ores.tooltip": "Automatically activates vein mining while targeting an ore.",
+    "liteminer_delta.config.auto_veinmine_ores.info": "When enabled, ores can be vein mined without holding or toggling the vein mining key.",
     "liteminer_delta.config.allow_vein_mining_at_zero_hunger": "Allow Vein Mining at Zero Hunger",
     "liteminer_delta.config.allow_vein_mining_at_zero_hunger.info": "When disabled, vein mining is blocked while the hunger bar is empty.",
     "liteminer_delta.config.allow_vein_mining_at_zero_hunger.tooltip": "Allows vein mining when the hunger bar is empty.",

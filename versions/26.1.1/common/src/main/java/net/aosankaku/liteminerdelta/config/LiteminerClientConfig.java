@@ -4,6 +4,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 public final class LiteminerClientConfig {
     public final ModConfigSpec.ConfigValue<KeyMode> keyMode;
+    public final ModConfigSpec.ConfigValue<Boolean> autoVeinMineOres;
     public final ModConfigSpec.ConfigValue<Boolean> showHUD;
     public final ModConfigSpec.ConfigValue<Double> hud_scale;
     public final ModConfigSpec.ConfigValue<Boolean> distinguishDeepslateOres;
@@ -17,6 +18,9 @@ public final class LiteminerClientConfig {
         keyMode = builder.translation("liteminer_delta.config.key_mode")
                 .comment(":)")
                 .defineEnum("key_mode", KeyMode.HOLD);
+        autoVeinMineOres = builder.translation("liteminer_delta.config.auto_veinmine_ores")
+                .comment("Automatically activates vein mining while targeting an ore.")
+                .define("auto_veinmine_ores", false);
         showHUD = builder.translation("liteminer_delta.config.show_hud").comment(":)").define("show_hud", true);
         hud_scale = builder.translation("liteminer_delta.config.hud_scale")
                 .comment(":)")

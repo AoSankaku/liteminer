@@ -20,6 +20,7 @@ import net.aosankaku.liteminerdelta.networking.LiteminerNetwork;
 import net.aosankaku.liteminerdelta.rendering.BlockHighlightRenderer;
 import net.aosankaku.liteminerdelta.rendering.HUD;
 import net.aosankaku.liteminerdelta.shapes.Cycler;
+import net.aosankaku.liteminerdelta.tags.LiteminerTags;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -27,6 +28,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
 import java.util.HashSet;
@@ -41,6 +43,8 @@ public class LiteminerClient {
     public static final ConfigHandle CONFIG_HANDLE;
     public static HashSet<BlockPos> selectedBlocks = HashSet.newHashSet(0);
     public static Cycler<LiteminerShape> shapes = new Cycler<>(LiteminerShapes.all());
+    private static final ClientActivationGate ACTIVATION_GATE = new ClientActivationGate();
+    private static boolean keybindState = false;
     private static boolean currentState = false;
     private static boolean hungerRequired = true;
     private static boolean lastDistinguishDeepslateOres = true;
@@ -72,7 +76,7 @@ public class LiteminerClient {
                 .info(info -> info
                         .headerKey("liteminer_delta.config.info.client.header")
                         .inlineTextKey("liteminer_delta.config.info.client.text")
-                        .urlKey("liteminer_delta.config.info.report_issue", "https://github.com/AoSankaku/liteminer"));
+                        .urlKey("liteminer_delta.config.info.report_issue", "https://github.com/AoSankaku/liteminer/issues"));
         CONFIG = new LiteminerClientConfig(builder);
         CONFIG_HANDLE = builder.build();
     }
@@ -155,25 +159,47 @@ public class LiteminerClient {
         }
 
         switch (CONFIG.keyMode()) {
-            case HOLD -> {
-                var newState = KEY_MAPPING.isDown();
-
-                if (newState == isVeinMining()) {
-                    return;
-                }
-
-                sendStateToServer(newState);
-                currentState = newState;
-            }
+            case HOLD -> keybindState = KEY_MAPPING.isDown();
             case TOGGLE -> {
                 if (KEY_MAPPING.consumeClick()) {
-                    var newState = !isVeinMining();
-
-                    sendStateToServer(newState);
-                    currentState = newState;
+                    keybindState = !keybindState;
                 }
             }
         }
+
+        boolean newState = keybindState || isTargetingOreAutomatically();
+        if (!newState) {
+            ACTIVATION_GATE.reset();
+        } else if (!isActivationAllowed(keybindState)) {
+            return;
+        }
+        if (newState == isVeinMining()) {
+            return;
+        }
+
+        sendStateToServer(newState);
+        currentState = newState;
+    }
+
+    private static boolean isActivationAllowed(boolean requestedByKeybind) {
+        ClientActivationGate.Result result = ACTIVATION_GATE.evaluate(
+                requestedByKeybind,
+                LiteminerNetwork.isServerSupported()
+        );
+        if (result == ClientActivationGate.Result.ALLOW) {
+            return true;
+        }
+
+        currentState = false;
+        if (result == ClientActivationGate.Result.BLOCK_AND_NOTIFY) {
+            Minecraft minecraft = Minecraft.getInstance();
+            if (minecraft.player != null) {
+                minecraft.player.sendOverlayMessage(
+                        Component.translatable("message.liteminer_delta.server_unavailable")
+                );
+            }
+        }
+        return false;
     }
 
     public static boolean isVeinMining() {
@@ -218,6 +244,19 @@ public class LiteminerClient {
     public static boolean isTargetingABlock() {
         HitResult result = Minecraft.getInstance().hitResult;
         return result != null && result.getType() == HitResult.Type.BLOCK;
+    }
+
+    private static boolean isTargetingOreAutomatically() {
+        if (!CONFIG.autoVeinMineOres.get()) {
+            return false;
+        }
+
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null || !(minecraft.hitResult instanceof BlockHitResult blockHitResult)) {
+            return false;
+        }
+
+        return minecraft.level.getBlockState(blockHitResult.getBlockPos()).is(LiteminerTags.Blocks.ORES);
     }
 
     public static Runnable getOpenConfigScreenCallback() {

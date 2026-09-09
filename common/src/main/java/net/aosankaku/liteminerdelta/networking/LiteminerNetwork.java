@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public class LiteminerNetwork {
     public static final NetworkChannel NET =
-            NetworkChannel.create(Identifier.fromNamespaceAndPath(Liteminer.MOD_ID, "main"));
+            NetworkChannel.createOptional(Identifier.fromNamespaceAndPath(Liteminer.MOD_ID, "main"));
 
     private static final boolean initialized = false;
 
@@ -43,6 +43,10 @@ public class LiteminerNetwork {
 
     public static <T extends Packet<T>> void sendToServer(T packet) {
         NET.sendToServer(packet);
+    }
+
+    public static boolean isServerSupported() {
+        return NET.canSendToServer(C2SVeinmineKeybindChange.class);
     }
 
     public static <T extends Packet<T>> void sendToPlayer(T packet, ServerPlayer player) {

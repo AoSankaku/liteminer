@@ -26,6 +26,7 @@ public class LiteminerTags {
     public static class Blocks {
         public static final TagKey<Block> EXCLUDED_BLOCKS = createBlockTag(Liteminer.MOD_ID, "excluded_blocks");
         public static final TagKey<Block> BLOCK_WHITELIST = createBlockTag(Liteminer.MOD_ID, "block_whitelist");
+        public static final TagKey<Block> ORES = createBlockTag(Liteminer.MOD_ID, "ores");
     }
 
     public static class Legacy {

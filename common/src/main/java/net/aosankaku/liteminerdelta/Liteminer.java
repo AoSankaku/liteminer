@@ -49,7 +49,7 @@ public final class Liteminer {
                 .info(info -> info
                         .headerKey("liteminer_delta.config.info.common.header")
                         .inlineTextKey("liteminer_delta.config.info.common.text")
-                        .urlKey("liteminer_delta.config.info.report_issue", "https://github.com/AoSankaku/liteminer"));
+                        .urlKey("liteminer_delta.config.info.report_issue", "https://github.com/AoSankaku/liteminer/issues"));
         CONFIG = new LiteminerConfig(builder);
         CONFIG_HANDLE = builder.build();
     }
@@ -114,6 +114,10 @@ public final class Liteminer {
         playerState.setShape(shape);
         playerState.setDistinguishDeepslateOres(distinguishDeepslateOres);
         playerState.setDistinguishStoneVariants(distinguishStoneVariants);
+    }
+
+    public void onPlayerLeave(ServerPlayer player) {
+        playerStateMap.remove(player.getUUID());
     }
 
     public float onBreakSpeed(ServerPlayer player) {

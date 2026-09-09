@@ -92,6 +92,10 @@ public final class Liteminer {
         playerState.setDistinguishStoneVariants(distinguishStoneVariants);
     }
 
+    public void onPlayerLeave(ServerPlayer player) {
+        playerStateMap.remove(player.getUUID());
+    }
+
     public float onBreakSpeed(ServerPlayer player) {
         LiteminerPlayerState playerState = getPlayerState(player);
         var isVeinMining = playerState.getKeymappingState();

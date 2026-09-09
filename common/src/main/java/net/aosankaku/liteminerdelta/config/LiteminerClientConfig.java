@@ -5,6 +5,7 @@ import com.iamkaf.konfig.api.v1.ConfigValue;
 
 public final class LiteminerClientConfig {
     public final ConfigValue<String> keyMode;
+    public final ConfigValue<Boolean> autoVeinMineOres;
     public final ConfigValue<Boolean> showHUD;
     public final ConfigValue<Double> hud_scale;
     public final ConfigValue<Boolean> distinguishDeepslateOres;
@@ -26,6 +27,11 @@ public final class LiteminerClientConfig {
                         .option(KeyMode.TOGGLE.name(), "Toggle", option -> option.tooltip("Press the vein mining key to switch on or off.")))
                 .comment("Controls how the vein mining keybind activates vein mining.")
                 .info(info -> info.inlineTextKey("liteminer_delta.config.key_mode.info"))
+                .clientOnly()
+                .build();
+        autoVeinMineOres = builder.bool("auto_veinmine_ores", false)
+                .comment("Automatically activates vein mining while targeting an ore.")
+                .info(info -> info.inlineTextKey("liteminer_delta.config.auto_veinmine_ores.info"))
                 .clientOnly()
                 .build();
         builder.pop();
