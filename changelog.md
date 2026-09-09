@@ -5,20 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 4.1.2
-
-### Fixed
-
-- The HUD block count and shape text now keep updating when block highlights are disabled.
-- NeoForge: Silk Touch now suppresses experience from secondary ore blocks during vein mining.
-
-## 3.1.3
+## 4.1.2-delta.1 / 3.1.3-delta.1
 
 ### Changed
 
 - Renamed the maintained fork to Liteminer Delta.
 - Changed the mod id to `liteminer_delta` and the Java namespace to `net.aosankaku.liteminerdelta`.
 - Preserved compatibility with the legacy `liteminer:*` tags and FTB Ultimine tags.
+- Added explicit migration guidance because configurations, commands, and the addon API namespace are not shared with upstream Liteminer.
 
 ### Fixed
 
@@ -198,11 +192,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First stable release of Liteminer.
 - Added tags for blacklisting blocks and tools:
   - Item tags:
-    - `liteminer_delta:excluded_tools`
-    - `liteminer_delta:included_tools`
+    - `liteminer:excluded_tools`
+    - `liteminer:included_tools`
   - Block tags:
-    - `liteminer_delta:excluded_blocks`
-    - `liteminer_delta:block_whitelist`
+    - `liteminer:excluded_blocks`
+    - `liteminer:block_whitelist`
   - Compatibility note: tags are compatible with FTB Ultimine tags.
 
 ## 0.5.2-beta.9

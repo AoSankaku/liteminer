@@ -8,7 +8,7 @@ Liteminer Delta is distributed under the original MIT license.
 ## ⛏️ About
 
 Liteminer Delta adds configurable vein mining with multiple mining shapes, a HUD, and cross-loader support.
-Built using a multi-loader architecture supporting Fabric, Forge (scaffolded), and NeoForge.
+Built using a multi-loader architecture supporting Fabric, Forge, and NeoForge.
 
 ## 📦 Features
 
@@ -20,31 +20,32 @@ Built using a multi-loader architecture supporting Fabric, Forge (scaffolded), a
 Liteminer Delta uses the `liteminer_delta:*` tag namespace and continues to read legacy
 `liteminer:*` tags for compatibility with existing worlds, datapacks, and modpacks.
 
+## ⚠️ Migration from Liteminer
+
+Liteminer Delta is a distinct mod, not an in-place update. Remove upstream Liteminer before installing
+Delta: its mod id is `liteminer_delta`, its configuration files and `/liteminer_delta` command are separate,
+and its addon API namespace is `net.aosankaku.liteminerdelta`. Only legacy `liteminer:*` data tags are read
+automatically; migrate configurations, commands, and API integrations deliberately.
+
 ## 🗂️ Monorepo Structure
 
 This repository contains all Minecraft versions of Liteminer Delta:
 
 ```
-liteminer/
-├── 1.20.1/           # Minecraft 1.20.1
-├── 1.21.1/           # Minecraft 1.21.1
-├── 1.21.11/          # Minecraft 1.21.11
-├── 26.1/             # Minecraft 26.1
-├── 26.1.2/             # Minecraft 26.1.2
-│   ├── common/       # Shared code across loaders
-│   ├── fabric/       # Fabric-specific implementation
-│   ├── forge/        # Forge scaffold (not enabled in settings yet)
-│   └── neoforge/     # NeoForge-specific implementation
-└── README.md         # This file
+common/                # Shared code across loaders
+fabric/                # Fabric implementation
+forge/                 # Forge implementation
+neoforge/              # NeoForge implementation
+versions/              # Minecraft-version overlays
 ```
 
 ## 🚀 Supported Versions
 
-- 26.1.2 - ✅ Active (`26.1.2/`)
-- 26.1 - ✅ Active (`26.1/`)
-- 1.21.11 — ✅ Active (`1.21.11/`)
-- 1.21.1 — 🤔 Maintenance, pending refactor (`1.21.1/`)
-- 1.20.1 — 🤔 Maintenance, pending refactor (`1.20.1/`)
+- 26.2 — Active (Fabric, Forge, NeoForge)
+- 26.1.2 — Active (Fabric, Forge, NeoForge)
+- 26.1.1 — Active (Fabric, Forge, NeoForge)
+- 26.1 — Active (Fabric, Forge, NeoForge)
+- 1.21.11 — Active (Fabric, Forge, NeoForge)
 
 ## 🛠️ Building
 
