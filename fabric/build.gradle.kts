@@ -4,6 +4,8 @@ plugins {
     id("com.iamkaf.multiloader.fabric")
 }
 
+apply(from = rootProject.file("gradle/amber-delta.gradle.kts"))
+
 val multiloader = MultiloaderProjectContext.of(project)
 val minecraftVersion = multiloader.minecraftVersion()
 val catalog = multiloader.catalogFor()
