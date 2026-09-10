@@ -33,14 +33,20 @@ describe("Amber Delta build dependency", () => {
         expect(dependencyRules).toContain("mavenLocal()");
     });
 
-    test("publishes against the Amber Delta Modrinth project", async () => {
+    test("publishes Amber Delta to Modrinth without changing the build dependency", async () => {
         const files = [...new Bun.Glob("versions/*/gradle.properties").scanSync({ cwd: fileURLToPath(root) })].sort();
 
         expect(files).toHaveLength(5);
         for (const file of files) {
             const properties = await source(file);
-            expect(properties, file).toContain("dependencies.modrinth.required=amber-delta,");
+            expect(properties, file).toContain("dependencies.modrinth.required=amber,");
         }
+
+        const publishingOverride = await source("stonecutter.gradle.kts");
+        expect(publishingOverride).toContain("MultiloaderPublishingExtension");
+        expect(publishingOverride).toContain("multiloaderPublishing");
+        expect(publishingOverride).toContain('providers.gradleProperty("publish.modrinth.dependencies")');
+        expect(publishingOverride).toContain('orElse("amber-delta")');
     });
 
     test("uses the configured Modrinth project and stages only Delta release jars", async () => {
@@ -50,10 +56,12 @@ describe("Amber Delta build dependency", () => {
 
         expect(properties).toContain("publish.dry-run=false");
         expect(properties).toContain("publish.modrinth.id=liteminer-delta");
+        expect(properties).toContain("publish.changelog.final-file=release-notes.md");
         expect(distribution).toContain("withType<Jar>()");
         expect(distribution).toContain('rootProject.file("LICENSE")');
-        expect(distribution).toContain('into("META-INF")');
-        expect(distribution).toContain('rename("LICENSE")');
+    expect(distribution).toContain('into("META-INF")');
+    expect(distribution).toContain('rename { "LICENSE" }');
+        expect(distribution).toContain("DuplicatesStrategy.EXCLUDE");
         expect(justfile).toContain("stage-modrinth version:");
         expect(justfile).toContain('liteminer_delta-${loader}-*-delta.1+{{version}}.jar');
         for (const loader of ["common", "fabric", "forge", "neoforge"]) {

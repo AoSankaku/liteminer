@@ -19,6 +19,10 @@ build node:
 build-all:
   @./gradlew build --console=plain
 
+stage-modrinth version:
+  @if ! just list-versions | grep -Fxq "{{version}}"; then echo "Unknown version: {{version}}"; exit 1; fi
+  @target="build/modrinth/{{version}}"; rm -rf "$target"; mkdir -p "$target"; for loader in $(just list-loaders "{{version}}"); do just build "{{version}}-${loader}"; release_jar=$(find "$loader/versions/{{version}}/build/libs" -maxdepth 1 -type f -name "liteminer_delta-${loader}-*-delta.1+{{version}}.jar" -print -quit); test -n "$release_jar"; cp "$release_jar" "$target/"; done
+
 compile-all:
   @tasks=(); for version in $(just list-versions); do tasks+=(":common:$version:compileJava"); for loader in $(just list-loaders "$version"); do tasks+=(":$loader:$version:compileJava"); done; done; ./gradlew --configure-on-demand "${tasks[@]}" --console=plain
 

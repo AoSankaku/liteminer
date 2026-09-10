@@ -1,3 +1,5 @@
+import com.iamkaf.multiloader.publishing.MultiloaderPublishingExtension
+
 plugins {
     id("dev.kikugie.stonecutter")
     id("fabric-loom") apply false
@@ -6,3 +8,17 @@ plugins {
 }
 
 stonecutter active "26.1.2".let { multiloaderStonecutter.active(it) }
+
+extensions.configure<MultiloaderPublishingExtension>("multiloaderPublishing") {
+    publish {
+        modrinth {
+            dependencies {
+                getRequired().set(
+                    providers.gradleProperty("publish.modrinth.dependencies")
+                        .orElse("amber-delta")
+                        .map { it.split(',').map(String::trim) }
+                )
+            }
+        }
+    }
+}

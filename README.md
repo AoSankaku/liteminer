@@ -67,7 +67,13 @@ just run 1.21.11 neoforge:runClient
 just test 1.21.11
 ```
 
-Built jars will be in `<version>/<loader>/build/libs/`
+Built jars are in `<loader>/versions/<version>/build/libs/`. For Modrinth uploads, stage only the Delta release jars instead of selecting files directly from that directory:
+
+```bash
+just stage-modrinth 26.2
+```
+
+This creates `build/modrinth/<version>/` with exactly one release jar for each enabled loader. Do not upload source, Javadoc, or legacy `liteminer-*.jar` files.
 
 ## 💻 Development
 
@@ -207,6 +213,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🔗 Links
 
 - **Issues**: https://github.com/AoSankaku/liteminer/issues
+- **Modrinth**: https://modrinth.com/mod/liteminer-delta
 - **Upstream project**: https://modrinth.com/mod/liteminer
 
 ## 👤 Author
