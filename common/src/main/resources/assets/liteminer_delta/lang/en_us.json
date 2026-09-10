@@ -15,6 +15,8 @@
   "liteminer_delta.config.distinguish_stone_variants.info": "Disable this to vein mine all blocks in the same base stone tag, including properly tagged modded blocks, together.",
   "liteminer_delta.config.distinguish_stone_variants.tooltip": "Prevents blocks in the same base stone tag, such as stone, granite, diorite, and andesite, from being vein mined together.",
     "key.liteminer_delta.veinmine": "Vein Mine",
+    "key.liteminer_delta.previous_shape": "Previous Mining Shape (Mouse Wheel Up)",
+    "key.liteminer_delta.next_shape": "Next Mining Shape (Mouse Wheel Down)",
     "key.category.liteminer_delta.liteminer_delta": "Liteminer Delta",
     "hud.liteminer_delta.selected_blocks": "%s Blocks",
     "hud.liteminer_delta.selected_blocks_singular": "1 Block",

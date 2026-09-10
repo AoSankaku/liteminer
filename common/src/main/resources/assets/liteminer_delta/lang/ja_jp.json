@@ -1,5 +1,7 @@
 {
   "key.liteminer_delta.veinmine": "一括破壊",
+  "key.liteminer_delta.previous_shape": "前の採掘形状（マウスホイール上）",
+  "key.liteminer_delta.next_shape": "次の採掘形状（マウスホイール下）",
   "key.category.liteminer_delta.liteminer_delta": "Liteminer Delta",
   "shape.liteminer_delta.shapeless": "自由形",
   "shape.liteminer_delta.small_tunnel": "小型トンネル",

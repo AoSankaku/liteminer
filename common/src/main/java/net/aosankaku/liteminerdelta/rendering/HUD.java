@@ -97,12 +97,7 @@ public class HUD {
         if (LiteminerClient.isVeinMining()) {
             Minecraft minecraft = Minecraft.getInstance();
             if (scrollY != 0) {
-                if (scrollY > 0) {
-                    LiteminerClient.shapes.previousItem();
-                } else if (scrollY < 0) {
-                    LiteminerClient.shapes.nextItem();
-                }
-                LiteminerClient.sendStateToServer(LiteminerClient.isVeinMining());
+                LiteminerClient.cycleShape(scrollY > 0);
             }
             if (!LiteminerClient.CONFIG.showHUD.get()) {
                 assert minecraft.player != null;

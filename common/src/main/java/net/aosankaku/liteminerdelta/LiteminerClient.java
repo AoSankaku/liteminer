@@ -41,6 +41,10 @@ public class LiteminerClient {
             KeyMapping.Category.register(Constants.resource(Constants.MOD_ID));
     public static final KeyMapping KEY_MAPPING =
             new KeyMapping("key.liteminer_delta.veinmine", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
+    public static final KeyMapping PREVIOUS_SHAPE_KEY_MAPPING =
+            new KeyMapping("key.liteminer_delta.previous_shape", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
+    public static final KeyMapping NEXT_SHAPE_KEY_MAPPING =
+            new KeyMapping("key.liteminer_delta.next_shape", InputConstants.Type.KEYSYM, InputConstants.UNKNOWN.getValue(), KEY_CATEGORY);
     public static final LiteminerClientConfig CONFIG;
     public static final ConfigHandle CONFIG_HANDLE;
     public static HashSet<BlockPos> selectedBlocks = HashSet.newHashSet(0);
@@ -127,6 +131,8 @@ public class LiteminerClient {
 
     public static void init() {
         KeybindHelper.register(KEY_MAPPING);
+        KeybindHelper.register(PREVIOUS_SHAPE_KEY_MAPPING);
+        KeybindHelper.register(NEXT_SHAPE_KEY_MAPPING);
         ClientTickEvents.END_CLIENT_TICK.register(LiteminerClient::onPostTick);
         HudEvents.RENDER_HUD.register(HUD::onRenderHUD);
         InputEvents.MOUSE_SCROLL_PRE.register(HUD::onMouseScroll);
@@ -146,6 +152,13 @@ public class LiteminerClient {
 
     public static void onPostTick() {
         openPendingConfigScreen();
+
+        if (PREVIOUS_SHAPE_KEY_MAPPING.consumeClick()) {
+            cycleShape(true);
+        }
+        if (NEXT_SHAPE_KEY_MAPPING.consumeClick()) {
+            cycleShape(false);
+        }
 
         boolean distinguishDeepslateOres = CONFIG.distinguishDeepslateOres.get();
         boolean distinguishStoneVariants = CONFIG.distinguishStoneVariants.get();
@@ -217,6 +230,19 @@ public class LiteminerClient {
 
     public static boolean isVeinMining() {
         return currentState;
+    }
+
+    public static boolean cycleShape(boolean previous) {
+        if (!isVeinMining()) {
+            return false;
+        }
+        if (previous) {
+            shapes.previousItem();
+        } else {
+            shapes.nextItem();
+        }
+        sendStateToServer(true);
+        return true;
     }
 
     public static void sendStateToServer(boolean keybindState) {
