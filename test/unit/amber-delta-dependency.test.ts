@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { fileURLToPath } from "node:url";
 
 const root = new URL("../../", import.meta.url);
 
@@ -30,5 +31,34 @@ describe("Amber Delta build dependency", () => {
 
         expect(dependencyRules).toContain("repositories");
         expect(dependencyRules).toContain("mavenLocal()");
+    });
+
+    test("publishes against the Amber Delta Modrinth project", async () => {
+        const files = [...new Bun.Glob("versions/*/gradle.properties").scanSync({ cwd: fileURLToPath(root) })].sort();
+
+        expect(files).toHaveLength(5);
+        for (const file of files) {
+            const properties = await source(file);
+            expect(properties, file).toContain("dependencies.modrinth.required=amber-delta,");
+        }
+    });
+
+    test("uses the configured Modrinth project and stages only Delta release jars", async () => {
+        const properties = await source("gradle.properties");
+        const distribution = await source("gradle/distribution.gradle.kts");
+        const justfile = await source("justfile");
+
+        expect(properties).toContain("publish.dry-run=false");
+        expect(properties).toContain("publish.modrinth.id=liteminer-delta");
+        expect(distribution).toContain("withType<Jar>()");
+        expect(distribution).toContain('rootProject.file("LICENSE")');
+        expect(distribution).toContain('into("META-INF")');
+        expect(distribution).toContain('rename("LICENSE")');
+        expect(justfile).toContain("stage-modrinth version:");
+        expect(justfile).toContain('liteminer_delta-${loader}-*-delta.1+{{version}}.jar');
+        for (const loader of ["common", "fabric", "forge", "neoforge"]) {
+            const buildScript = await source(`${loader}/build.gradle.kts`);
+            expect(buildScript, loader).toContain('apply(from = rootProject.file("gradle/distribution.gradle.kts"))');
+        }
     });
 });
