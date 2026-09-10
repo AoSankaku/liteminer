@@ -156,9 +156,8 @@ public class LiteminerClient {
         if (result == ClientActivationGate.Result.BLOCK_AND_NOTIFY) {
             Minecraft minecraft = Minecraft.getInstance();
             if (minecraft.player != null) {
-                minecraft.player.displayClientMessage(
-                        Component.translatable("message.liteminer_delta.server_unavailable"),
-                        true
+                minecraft.player.sendOverlayMessage(
+                        Component.translatable("message.liteminer_delta.server_unavailable")
                 );
             }
         }

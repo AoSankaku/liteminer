@@ -74,4 +74,14 @@ describe("client-only server support", () => {
 
         expect(client).toContain("minecraft.player.sendOverlayMessage(");
     });
+
+    test("Minecraft 26.1 releases use the current overlay message API", async () => {
+        for (const version of ["26.1", "26.1.1", "26.1.2"]) {
+            const client = await source(
+                `versions/${version}/common/src/main/java/net/aosankaku/liteminerdelta/LiteminerClient.java`,
+            );
+            expect(client, version).toContain("minecraft.player.sendOverlayMessage(");
+            expect(client, version).not.toContain("minecraft.player.displayClientMessage(");
+        }
+    });
 });
