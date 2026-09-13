@@ -2,11 +2,13 @@
 
 ## 0. 文書の状態
 
-- 状態: **計画のみ（未実装・未実行）**
+- 状態: **試験ハーネスは未実装・未実行。1.20.1／1.21.1 の移植変更は隔離ワークツリーでビルド済みだが、未コミット・未統合**
+- 最終更新: 2026-09-13
 - 対象: Amber Delta と Liteminer Delta のクライアント／サーバー非対称構成
 - 必須 Minecraft 版: **26.2、1.21.1、1.20.1**
 - 時間に余裕がある場合: 現在 Liteminer Delta が対応するその他の版、その後 Amber Delta の主要境界版
-- この計画の作成時点では、ビルド、依存関係の取得、Minecraft／TeaKit の起動、テスト実行を行わない。
+- Liteminer Delta 1.20.1 はFabric／Forge／Quilt、1.21.1はFabric／NeoForgeでローカルビルド成功済み。Amber Deltaも対応する1.20.1／1.21.1成果物を生成済みである。ただし、Liteminer側の移植変更は各版の隔離ワークツリーにあり、現在の `main` へは統合されていない。
+- この更新ではMinecraft／TeaKitの起動と非対称試験実行は行わない。実行開始には本書のハーネス実装・レビュー・実行開始前ゲート通過が必要である。
 
 ## 1. 目的と合格条件
 
@@ -54,20 +56,36 @@ Amber 単体スイートを先に実行し、そこで接続に失敗した場�
 
 ### P0: 必須
 
-| Minecraft | ローダー | Amber 単体 | Liteminer + Amber | 現時点の状態 |
-|---|---|---:|---:|---|
-| 26.2 | Fabric / Forge / NeoForge | 6ケース | 6ケース | 実行可能な構成あり |
-| 1.21.1 | Fabric / Forge / NeoForge | 6ケース | 6ケース | Amber は構成あり。Liteminer は版定義がなく実行前提未達 |
-| 1.20.1 | Fabric / Forge | 4ケース | 4ケース | Amber は構成あり。Liteminer は版定義がなく実行前提未達 |
+| Minecraft | Amber単体のローダー | Liteminer複合のローダー | Amber単体 | Liteminer + Amber | 成果物の状態 |
+|---|---|---|---:|---:|---|
+| 26.2 | Fabric / Forge / NeoForge | Fabric / Forge / NeoForge | 6ケース | 6ケース | 既存構成あり。実行前に再ビルドと固定マニフェスト生成を行う |
+| 1.21.1 | Fabric / Forge / NeoForge | Fabric / NeoForge | 6ケース | 4ケース | Amber 3ローダー、Liteminer Fabric／NeoForgeのローカル成果物あり |
+| 1.20.1 | Fabric / Forge | Fabric / Forge | 4ケース | 4ケース | Amber／LiteminerともFabric／Forgeのローカル成果物あり |
 
-ケース数は「ローダー数 × 2方向」。1.20.1 の NeoForge は Amber Delta の対応ローダーに含まれないため **N/A** とし、失敗や未実施には数えない。
+ケース数は「各スイートの対応ローダー数 × 2方向」。現在のP0は合計30ケース（Amber単体16ケース、Liteminer複合14ケース）である。
 
-P0 は合計32ケースである。
+- 1.21.1 Liteminer Forgeは製品モジュールがないため、P0から除外して **N/A** とする。公開対象に追加する場合は、製品ポートと2方向の試験を独立タスクとして追加する。
+- 1.20.1 Liteminer Quilt成果物は生成済みだが、Amber Deltaの正式なQuilt成果物がないためP0には含めない。Amber Fabric成果物をQuiltで利用する試験は、互換性方針を確定した後の追加ケースとする。
+- 1.20.1／1.21.1の「ローカル製品成果物不足」は解消した。ただしハーネスが未実装なので、現時点の全ケースは実行可能扱いにせず `BLOCKED_HARNESS` とする。
+- 対象版と異なるjar、中間common jar、`dev-shadow` jar、sources jarを代用してはならない。各ケースではremap済み配布用jarだけを固定マニフェストへ登録する。
 
-- 現状そのまま実行候補にできるもの: Amber 単体16ケース + 26.2 Liteminer 6ケース = 22ケース
-- Liteminer の版追加後に実行可能になるもの: 1.21.1 の6ケース + 1.20.1 の4ケース = 10ケース
+#### P0成果物ベースライン
 
-**重要:** 現在の Liteminer Delta リポジトリには `1.21.1` と `1.20.1` の版定義がない。したがって、この2版の Liteminer 複合試験は、対応版を移植して成果物を生成できる状態になるまで `BLOCKED_PREREQUISITE` と記録する。成果物がないまま別版の jar を代用してはならない。
+今回の製品移植で、次の配布用jarをローカル生成できることを確認した。パスは現時点の作業環境における参照先であり、固定された試験入力ではない。また、Liteminer成果物は未コミット変更を含む隔離ワークツリーから生成されている。ハーネス実行前に対象ソースをコミットで固定してクリーン再ビルドし、ソースコミット、ファイル名、サイズ、SHA-256、Mod ID、Modバージョンを `asymmetric-matrix.toml` に記録する。
+
+| Minecraft | Mod | ローダー | 確認済みローカル成果物 |
+|---|---|---|---|
+| 1.20.1 | Liteminer Delta | Fabric | `.gradle/codex-worktrees/1.20.1-port/fabric/build/libs/liteminer_delta-fabric-1.0.0-delta.1+1.20.1.jar` |
+| 1.20.1 | Liteminer Delta | Forge | `.gradle/codex-worktrees/1.20.1-port/forge/build/libs/liteminer_delta-forge-1.0.0-delta.1+1.20.1.jar` |
+| 1.21.1 | Liteminer Delta | Fabric | `.gradle/codex-worktrees/1.21.1-stone/fabric/build/libs/liteminer_delta-fabric-1.0.0-delta.1+1.21.1.jar` |
+| 1.21.1 | Liteminer Delta | NeoForge | `.gradle/codex-worktrees/1.21.1-stone/neoforge/build/libs/liteminer_delta-neoforge-1.0.0-delta.1+1.21.1.jar` |
+| 1.20.1 | Amber Delta | Fabric | `../amber-delta/fabric/versions/1.20.1/build/libs/amber-fabric-11.1.3+1.20.1-delta.1.jar` |
+| 1.20.1 | Amber Delta | Forge | `../amber-delta/forge/versions/1.20.1/build/libs/amber-forge-11.1.3+1.20.1-delta.1.jar` |
+| 1.21.1 | Amber Delta | Fabric | `../amber-delta/fabric/versions/1.21.1/build/libs/amber-fabric-11.1.3+1.21.1-delta.1.jar` |
+| 1.21.1 | Amber Delta | Forge | `../amber-delta/forge/versions/1.21.1/build/libs/amber-forge-11.1.3+1.21.1-delta.1.jar` |
+| 1.21.1 | Amber Delta | NeoForge | `../amber-delta/neoforge/versions/1.21.1/build/libs/amber-neoforge-11.1.3+1.21.1-delta.1.jar` |
+
+1.20.1 Liteminer DeltaではCommon／Fabric／Forge／Quilt、1.21.1ではCommon／Fabric／NeoForgeの `build` が成功している。これは現在の未コミット変更について製品のコンパイルと成果物生成を確認した証拠であり、クリーンチェックアウトからの再現性、`main` への統合、非対称ログイン成功の証拠には数えない。
 
 ### P1: 時間があれば実施
 
@@ -93,7 +111,7 @@ Amber Delta の全対応版を総当たりする代わりに、最初はプロ�
 予定ファイル:
 
 - `test/teakit/asymmetric.test.ts`: ログイン維持、通常採掘、一括破壊不作動のアサーション
-- `test/teakit/asymmetric-matrix.toml`: 版、ローダー、優先度、方向、配置 Mod、対応可否を一元管理
+- `test/teakit/asymmetric-matrix.toml`: 版、ローダー、優先度、方向、配置 Mod、対応可否、ソースコミット、成果物パスとSHA-256を一元管理
 - `scripts/run-asymmetric-teakit.ps1`: サーバーとクライアントを別 game directory／別プロセスで起動し、TeaKit 実行と後始末を行うオーケストレーター
 - `justfile`: P0、P1、単一ケース実行用の入口を追加
 
@@ -133,7 +151,7 @@ flowchart LR
 
 詳細:
 
-1. 対象版・ローダーの Liteminer／Amber／TeaKit jar と実行依存関係が揃っているか検査する。
+1. 対象版・ローダーの Liteminer／Amber／TeaKit jar と実行依存関係が揃い、固定マニフェストのソースコミット、ファイル名、サイズ、SHA-256、Mod ID、Modバージョンと一致するか検査する。不一致・不足があれば起動せず失敗にする。
 2. クライアントと dedicated server の隔離ディレクトリを作る。
 3. マニフェストどおり片側だけに対象 Mod を配置し、実際の `mods` 一覧を成果物へ保存する。
 4. EULA 受諾済みの一時サーバーを、動的に確保したローカルポート、offline mode、専用ワールドで起動する。
@@ -178,7 +196,8 @@ flowchart LR
 - `PRODUCT_BEHAVIOR`: 接続は成功するが、一括破壊が誤作動する
 - `PRODUCT_CRASH`: クライアントまたはサーバーのクラッシュ
 - `HARNESS`: TeaKit、ポート、起動、入力制御の問題
-- `BLOCKED_PREREQUISITE`: 対象版の成果物や版定義が存在しない
+- `BLOCKED_PREREQUISITE`: 対象版の製品成果物、依存成果物、版定義など試験入力が存在しない
+- `BLOCKED_HARNESS`: 試験対象成果物はあるが、非対称ハーネスまたは必要なTeaKitノードが未実装で開始できない
 - `N/A`: その版でローダーがサポートされない
 
 ## 8. 保存する成果物
@@ -194,7 +213,7 @@ flowchart LR
 - 失敗時スクリーンショット
 - 再現用の単一ケースコマンド
 
-総括レポートでは P0／P1 を分け、未実施、失敗、`BLOCKED_PREREQUISITE`、`N/A` を合格と混同しない。
+総括レポートではP0／P1を分け、未実施、失敗、`BLOCKED_PREREQUISITE`、`BLOCKED_HARNESS`、`N/A`を合格と混同しない。
 
 ## 9. 実施体制
 
@@ -202,7 +221,7 @@ flowchart LR
 
 - P0 の対象、期待動作、例外の変更を承認する。
 - 製品不具合とハーネス不具合の最終分類を行う。
-- `1.21.1`／`1.20.1` の Liteminer 移植が必要になった場合、別作業として実装とレビューを行う。
+- 実行で1.21.1／1.20.1の製品不具合が判明した場合、ハーネスや期待値を緩めず、製品修正と再レビューを別作業として行う。
 
 ### GPT-5.6 Luna（実行・監視担当として利用可能）
 
@@ -223,24 +242,26 @@ flowchart LR
 
 - [ ] 非対称 TeaKit ハーネスの実装と独立レビューが完了している。
 - [ ] 26.2 の3ローダーで client/server の隔離起動ができる。
-- [ ] Amber Delta について 1.21.1 の3ローダー、1.20.1 のFabric／Forge成果物がある。
-- [ ] Liteminer 複合の必須範囲に 1.21.1／1.20.1 を含める場合、Liteminer Delta の対応版が実装・ビルド済みである。
+- [x] Amber Deltaについて1.21.1の3ローダー、1.20.1のFabric／Forge成果物がローカル生成済みである。
+- [x] Liteminer Delta 1.20.1のFabric／Forgeおよび1.21.1のFabric／NeoForgeが隔離ワークツリーでローカルビルド済みである。
+- [ ] Liteminer Delta 1.20.1／1.21.1の移植変更がコミット・レビュー済みで、試験対象コミットが固定されている。
+- [ ] 固定コミットのクリーンチェックアウトからP0成果物を再ビルドし、配布用jarだけをSHA-256付き固定マニフェストへ登録している。
 - [ ] TeaKit のみの対照試験で、TeaKit が Amber／Liteminer の通信契約を代替しないと確認できている。
 - [ ] 固定されたテストマニフェスト、タイムアウト、失敗分類、成果物保存先がレビュー済みである。
 - [ ] 実行中の開発サーバーや同じポートを使うプロセスがない。
 
 ## 11. リリース判定
 
-- P0 の実行可能な全ケースが合格し、失敗・未実施がないことを必須とする。
-- `BLOCKED_PREREQUISITE` は合格ではない。該当 Minecraft 版を Liteminer Delta の対応版として公開する場合は、移植後に必ず解消する。
-- 1.20.1 NeoForge のような正式非対応組み合わせは `N/A` として明示する。
+- P0対象の全30ケースが合格し、失敗・未実施・ブロック状態がないことを必須とする。
+- `BLOCKED_PREREQUISITE` と `BLOCKED_HARNESS` は合格ではない。公開前にP0対象から両状態を解消する。
+- P0で試験したLiteminer成果物のソースコミットが公開対象ブランチへ統合され、公開候補jarのSHA-256が試験済みjarと一致していることを必須とする。
+- 1.21.1 Liteminer Forge、1.20.1 NeoForgeのような正式非対応組み合わせは `N/A` として明示する。1.20.1 QuiltはAmber Deltaの対応方針が確定するまで追加検討扱いとする。
 - P1／P2 の結果は追加保証として公開資料に使えるが、部分実施を「全対応版で検証済み」と表現しない。
 
 ## 12. 概算（実行時の目安）
 
 - ハーネス実装・初期安定化: 4〜8時間
-- 現在実行候補の P0 22ケース: キャッシュ済みで約45〜90分
-- Liteminer 旧版移植後の P0 全32ケース: キャッシュ済みで約60〜120分
+- 製品成果物が揃ったP0全30ケース: キャッシュ済みで約60〜120分
 - P1 最大48ケース: 追加で約90〜180分
 
 初回依存関係取得、Minecraft の起動速度、ローダー固有のクラッシュ調査は別枠とする。Luna に実行・監視を担当させる場合も、壁時計時間は大きく短縮しないが、手動監視負担は減らせる。
