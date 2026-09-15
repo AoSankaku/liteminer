@@ -12,6 +12,7 @@ public final class LiteminerConfig {
     public final ModConfigSpec.ConfigValue<Double> foodExhaustion;
     public final ModConfigSpec.ConfigValue<Boolean> distinguishGrownCrops;
     public final ModConfigSpec.ConfigValue<Boolean> matchDeepslateOreVariants;
+    public final ModConfigSpec.ConfigValue<Boolean> matchBaseStoneVariants;
 
     public LiteminerConfig(ModConfigSpec.Builder builder) {
         preventToolBreaking = builder.translation("liteminer.config.prevent_tool_breaking")
@@ -47,5 +48,9 @@ public final class LiteminerConfig {
         matchDeepslateOreVariants = builder.translation("liteminer.config.match_deepslate_ore_variants")
                 .comment(":)")
                 .define("match_deepslate_ore_variants", true);
+
+        matchBaseStoneVariants = builder.translation("liteminer.config.match_base_stone_variants")
+                .comment(":)")
+                .define("match_base_stone_variants", false);
     }
 }

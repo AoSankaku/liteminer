@@ -3,6 +3,7 @@ package com.iamkaf.liteminer.shapes;
 import com.iamkaf.liteminer.Liteminer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BlockFamily {
     private static final Map<Block, Set<Block>> BLOCK_MATCHES = new HashMap<>();
@@ -44,7 +46,15 @@ public class BlockFamily {
             return true;
         }
 
-        if (Liteminer.CONFIG.matchDeepslateOreVariants.get() && matchesDeepslateOreVariant(from, to)) {
+        if (matchesDeepslateOreVariant(from, to)) {
+            return Liteminer.CONFIG.matchDeepslateOreVariants.get();
+        }
+
+        if (Liteminer.CONFIG.matchDeepslateOreVariants.get() && shareOreFamilyTag(from, to)) {
+            return true;
+        }
+
+        if (Liteminer.CONFIG.matchBaseStoneVariants.get() && shareBaseStoneTag(from, to)) {
             return true;
         }
 
@@ -128,6 +138,36 @@ public class BlockFamily {
         boolean toIsDeepslate = toPath.startsWith("deepslate_");
 
         return fromIsDeepslate != toIsDeepslate;
+    }
+
+    private static boolean shareOreFamilyTag(Block from, Block to) {
+        var fromOreTags = BuiltInRegistries.BLOCK.wrapAsHolder(from)
+                .tags()
+                .filter(tag -> isOreFamilyTag(tag.location().getNamespace(), tag.location().getPath()))
+                .collect(Collectors.toSet());
+
+        return !fromOreTags.isEmpty() && BuiltInRegistries.BLOCK.wrapAsHolder(to)
+                .tags()
+                .filter(tag -> isOreFamilyTag(tag.location().getNamespace(), tag.location().getPath()))
+                .anyMatch(fromOreTags::contains);
+    }
+
+    private static boolean isOreFamilyTag(String namespace, String path) {
+        boolean isHierarchicalOreTag = path.startsWith("ores/") && path.length() > "ores/".length();
+        if ("forge".equals(namespace)) {
+            return isHierarchicalOreTag;
+        }
+        if ("c".equals(namespace)) {
+            return isHierarchicalOreTag || (path.endsWith("_ores") && !"ores".equals(path));
+        }
+        return "minecraft".equals(namespace) && path.endsWith("_ores");
+    }
+
+    private static boolean shareBaseStoneTag(Block from, Block to) {
+        var fromState = from.defaultBlockState();
+        var toState = to.defaultBlockState();
+        return (fromState.is(BlockTags.BASE_STONE_OVERWORLD) && toState.is(BlockTags.BASE_STONE_OVERWORLD))
+                || (fromState.is(BlockTags.BASE_STONE_NETHER) && toState.is(BlockTags.BASE_STONE_NETHER));
     }
 
     /**

@@ -13,6 +13,7 @@ public final class LiteminerConfig {
     public final ConfigValue<Double> foodExhaustion;
     public final ConfigValue<Boolean> distinguishGrownCrops;
     public final ConfigValue<Boolean> matchDeepslateOreVariants;
+    public final ConfigValue<Boolean> matchBaseStoneVariants;
 
     public LiteminerConfig(ConfigBuilder builder) {
         builder.push("safety")
@@ -91,6 +92,12 @@ public final class LiteminerConfig {
         matchDeepslateOreVariants = builder.bool("match_deepslate_ore_variants", true)
                 .comment("Treats regular and deepslate variants of the same ore as matching blocks.")
                 .info(info -> info.inlineTextKey("liteminer.config.match_deepslate_ore_variants.info"))
+                .sync(true)
+                .build();
+
+        matchBaseStoneVariants = builder.bool("match_base_stone_variants", false)
+                .comment("Treats blocks in the same base stone family as matching blocks.")
+                .info(info -> info.inlineTextKey("liteminer.config.match_base_stone_variants.info"))
                 .sync(true)
                 .build();
         builder.pop();

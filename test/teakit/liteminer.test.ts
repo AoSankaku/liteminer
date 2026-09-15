@@ -58,6 +58,64 @@ describe("Liteminer vein mining", () => {
     }
   });
 
+  test("honors ore and base-stone variant matching settings", {
+    target: { minecraft: "26.2" },
+  }, async (ctx) => {
+    const area = box({ x: 118, y: 69, z: 0 }, { x: 126, y: 72, z: 5 });
+    const oreOrigin = { x: 122, y: 70, z: 2 };
+    const oreVariant = { x: 122, y: 70, z: 3 };
+    const stoneOrigin = { x: 124, y: 70, z: 2 };
+    const stoneVariant = { x: 124, y: 70, z: 3 };
+    let deepslateVariantsDisabled = false;
+    let baseStoneVariantsEnabled = false;
+    try {
+      await prepareCreativeTest(ctx, { x: 122, y: 70, z: 0 }, area, 12);
+      await ctx.world.fill({ x: 118, y: 69, z: 0 }, { x: 126, y: 69, z: 5 }, "minecraft:stone");
+      await ctx.client.command("/liteminer shape set 0");
+
+      await setBlocks(ctx, [
+        block(oreOrigin.x, oreOrigin.y, oreOrigin.z, "minecraft:coal_ore"),
+        block(oreVariant.x, oreVariant.y, oreVariant.z, "minecraft:deepslate_coal_ore"),
+      ]);
+      await holdVeinmineAndMine(ctx, oreOrigin, { x: 122.5, y: 70.5, z: 2.5 });
+      await waitForAir(ctx, [oreOrigin, oreVariant]);
+
+      await toggleConfigEntry(ctx, "Match Deepslate Ore Variants");
+      deepslateVariantsDisabled = true;
+      await setBlocks(ctx, [
+        block(oreOrigin.x, oreOrigin.y, oreOrigin.z, "minecraft:coal_ore"),
+        block(oreVariant.x, oreVariant.y, oreVariant.z, "minecraft:deepslate_coal_ore"),
+      ]);
+      await holdVeinmineAndMine(ctx, oreOrigin, { x: 122.5, y: 70.5, z: 2.5 });
+      await waitForAir(ctx, [oreOrigin]);
+      await assertBlock(ctx, oreVariant, "minecraft:deepslate_coal_ore");
+      await toggleConfigEntry(ctx, "Match Deepslate Ore Variants");
+      deepslateVariantsDisabled = false;
+
+      await setBlocks(ctx, [
+        block(stoneOrigin.x, stoneOrigin.y, stoneOrigin.z, "minecraft:stone"),
+        block(stoneVariant.x, stoneVariant.y, stoneVariant.z, "minecraft:granite"),
+      ]);
+      await holdVeinmineAndMine(ctx, stoneOrigin, { x: 124.5, y: 70.5, z: 2.5 });
+      await waitForAir(ctx, [stoneOrigin]);
+      await assertBlock(ctx, stoneVariant, "minecraft:granite");
+
+      await toggleConfigEntry(ctx, "Match Base Stone Variants");
+      baseStoneVariantsEnabled = true;
+      await setBlocks(ctx, [
+        block(stoneOrigin.x, stoneOrigin.y, stoneOrigin.z, "minecraft:stone"),
+        block(stoneVariant.x, stoneVariant.y, stoneVariant.z, "minecraft:granite"),
+      ]);
+      await holdVeinmineAndMine(ctx, stoneOrigin, { x: 124.5, y: 70.5, z: 2.5 });
+      await waitForAir(ctx, [stoneOrigin, stoneVariant]);
+    } finally {
+      await ctx.client.keyState(96, false);
+      if (baseStoneVariantsEnabled) await toggleConfigEntry(ctx, "Match Base Stone Variants");
+      if (deepslateVariantsDisabled) await toggleConfigEntry(ctx, "Match Deepslate Ore Variants");
+      await cleanup(ctx, area, { x: 122, y: 70, z: 0 }, 12);
+    }
+  });
+
   test("renders highlight lines while selecting a vein", async (ctx) => {
     const area = box({ x: 8, y: 69, z: 0 }, { x: 16, y: 72, z: 6 });
     try {
@@ -436,11 +494,15 @@ async function setExperience(ctx: TeaKitTestContext, points: number) {
 }
 
 async function toggleRequireCorrectTool(ctx: TeaKitTestContext) {
+  await toggleConfigEntry(ctx, "Require Correct Tool");
+}
+
+async function toggleConfigEntry(ctx: TeaKitTestContext, label: string) {
   await ctx.client.closeMenus();
   await ctx.client.command("/liteminer config");
   let screen = await ctx.client.waitForScreen("Liteminer Configuration", { timeoutMs: 10_000 });
-  screen = await scrollToConfigEntry(ctx, "Require Correct Tool");
-  await screen.lists("selection_list").entry({ label: "Require Correct Tool" }).activate();
+  screen = await scrollToConfigEntry(ctx, label);
+  await screen.lists("selection_list").entry({ label }).activate();
   await ctx.runtime.wait(300);
   await ctx.client.closeMenus();
   await ctx.runtime.wait(500);
