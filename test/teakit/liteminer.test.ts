@@ -58,6 +58,33 @@ describe("Liteminer vein mining", () => {
     }
   });
 
+  test("cycles the selected shape through the shared client control", {
+    target: { minecraft: "26.2" },
+  }, async (ctx) => {
+    const area = box({ x: 118, y: 69, z: 0 }, { x: 126, y: 74, z: 6 });
+    const target = { x: 122, y: 71, z: 3 };
+    const selection = cuboidPositions({ x: 121, y: 70, z: 3 }, { x: 123, y: 72, z: 3 });
+    try {
+      await prepareCreativeTest(ctx, { x: 122, y: 70, z: 0 }, area, 12);
+      await ctx.world.fill({ x: 118, y: 69, z: 0 }, { x: 126, y: 69, z: 6 }, "minecraft:stone");
+      await ctx.world.fill({ x: 121, y: 70, z: 3 }, { x: 123, y: 72, z: 3 }, "minecraft:stone");
+      await ctx.world.setBlock(target, "minecraft:coal_ore");
+      await ctx.client.command("/liteminer shape set 0");
+      await ctx.client.lookAt({ x: 122.5, y: 71.5, z: 3.5 });
+      await ctx.client.keyState(96, true);
+      await ctx.runtime.wait(1_200);
+
+      await ctx.client.scroll({ x: 213.5, y: 120, verticalAmount: 1 });
+      await ctx.runtime.wait(500);
+      await ctx.player.mine(target, { timeoutMs: 5_000 });
+      await waitForAir(ctx, selection);
+    } finally {
+      await ctx.client.keyState(96, false);
+      await ctx.client.command("/liteminer shape set 0");
+      await cleanup(ctx, area, { x: 122, y: 70, z: 0 }, 12);
+    }
+  });
+
   test("renders highlight lines while selecting a vein", async (ctx) => {
     const area = box({ x: 8, y: 69, z: 0 }, { x: 16, y: 72, z: 6 });
     try {

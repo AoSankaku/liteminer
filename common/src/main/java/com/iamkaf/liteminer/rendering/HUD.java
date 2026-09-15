@@ -5,8 +5,6 @@ import com.iamkaf.liteminer.LiteminerClient;
 import com.iamkaf.liteminer.api.event.LiteminerClientEvents;
 import com.iamkaf.liteminer.api.event.LiteminerHudContext;
 import com.iamkaf.liteminer.api.shape.LiteminerShape;
-import com.iamkaf.liteminer.networking.C2SVeinmineKeybindChange;
-import com.iamkaf.liteminer.networking.LiteminerNetwork;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -90,15 +88,7 @@ public class HUD {
         if (LiteminerClient.isVeinMining()) {
             Minecraft minecraft = Minecraft.getInstance();
             if (scrollY != 0) {
-                if (scrollY > 0) {
-                    LiteminerClient.shapes.previousItem();
-                } else if (scrollY < 0) {
-                    LiteminerClient.shapes.nextItem();
-                }
-                LiteminerNetwork.sendToServer(new C2SVeinmineKeybindChange(
-                        LiteminerClient.isVeinMining(),
-                        LiteminerClient.shapes.getCurrentIndex()
-                ));
+                LiteminerClient.cycleShape(scrollY > 0);
             }
             if (!LiteminerClient.CONFIG.showHUD.get()) {
                 assert minecraft.player != null;
