@@ -19,11 +19,13 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
@@ -89,6 +91,7 @@ public class LiteminerClient {
 
                 LiteminerNetwork.sendToServer(new C2SVeinmineKeybindChange(newState, shapes.getCurrentIndex()));
                 currentState = newState;
+                playModeToggleSound(newState);
             }
             case TOGGLE -> {
                 if (KEY_MAPPING.consumeClick()) {
@@ -96,9 +99,16 @@ public class LiteminerClient {
 
                     LiteminerNetwork.sendToServer(new C2SVeinmineKeybindChange(newState, shapes.getCurrentIndex()));
                     currentState = newState;
+                    playModeToggleSound(newState);
                 }
             }
         }
+    }
+
+    private static void playModeToggleSound(boolean enabled) {
+        Minecraft.getInstance().getSoundManager().play(
+                SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, enabled ? 1.2F : 0.8F)
+        );
     }
 
     public static boolean isVeinMining() {
