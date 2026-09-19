@@ -22,6 +22,12 @@ public interface Walker {
         return walk(level, player, origin);
     }
 
+    // getDestroySpeed(Level, BlockPos) is deprecated but is needed for context-sensitive block hardness.
+    @SuppressWarnings("deprecation")
+    default boolean canExpandGeometricShape(Level level, BlockPos origin) {
+        return level.getBlockState(origin).getDestroySpeed(level, origin) > 0.0F;
+    }
+
     @SuppressWarnings("deprecation")
     default boolean shouldMine(Player player, Level level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
