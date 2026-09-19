@@ -19,10 +19,10 @@ public final class LiteminerClientConfig {
                 .comment(":)")
                 .defineInRange("hud_scale", 1d, 0.5d, 2d);
         distinguishDeepslateOres = builder.translation("liteminer_delta.config.distinguish_deepslate_ores")
-                .comment("Whether regular and deepslate ore variants should be mined separately.")
+                .comment("Whether regular and deepslate ore variants should be mined separately during shapeless vein mining.")
                 .define("distinguish_deepslate_ores", true);
         distinguishStoneVariants = builder.translation("liteminer_delta.config.distinguish_stone_variants")
-                .comment("Whether blocks in the same base stone tag should be mined separately.")
+                .comment("Whether blocks in the same base stone tag should be mined separately during shapeless vein mining.")
                 .define("distinguish_stone_variants", true);
     }
 }

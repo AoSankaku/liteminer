@@ -38,6 +38,10 @@ public class StaircaseDownWalker implements Walker {
             return potentialBrokenBlocks;
         }
 
+        if (!canExpandGeometricShape(level, origin)) {
+            return potentialBrokenBlocks;
+        }
+
         searchBlocks(player, level, origin, origin, potentialBrokenBlocks, originState.getBlock(), direction);
         VISITED.clear();
 

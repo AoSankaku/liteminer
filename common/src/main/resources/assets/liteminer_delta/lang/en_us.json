@@ -27,9 +27,9 @@
   "liteminer_delta.config.hud_scale.tooltip": "Changes how big the HUD elements are.",
 
   "liteminer_delta.config.distinguish_deepslate_ores": "Separate Deepslate Ores",
-  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Prevents regular and deepslate variants of the same ore from being vein mined together.",
+  "liteminer_delta.config.distinguish_deepslate_ores.tooltip": "Prevents regular and deepslate variants of the same ore from being matched during shapeless vein mining.",
   "liteminer_delta.config.distinguish_stone_variants": "Separate Stone Variants",
-  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Prevents blocks in the same base stone tag, such as stone, granite, diorite, and andesite, from being vein mined together.",
+  "liteminer_delta.config.distinguish_stone_variants.tooltip": "Prevents blocks in the same base stone tag, such as stone, granite, diorite, and andesite, from being matched during shapeless vein mining.",
 
   "liteminer_delta.config.block_break_limit": "Block Break Limit",
   "liteminer_delta.config.block_break_limit.tooltip": "Upper limit to how many blocks can be broken at a time.",

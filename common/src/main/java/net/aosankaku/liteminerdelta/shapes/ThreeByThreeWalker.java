@@ -50,6 +50,10 @@ public class ThreeByThreeWalker implements Walker {
             return potentialBrokenBlocks;
         }
 
+        if (!canExpandGeometricShape(level, origin)) {
+            return potentialBrokenBlocks;
+        }
+
         searchBlocks(player, level, origin, origin, potentialBrokenBlocks, originState.getBlock(), direction);
 
         return potentialBrokenBlocks;
